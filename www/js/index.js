@@ -82,6 +82,8 @@ function ErrorLoad(e) {
     alert(e.message);
 }
 function playSound(buffer) {
+    alert('entra playSound');
+    alert(buffer);
     source = context.createBufferSource();
     source.buffer = buffer;
     source.connect(context.destination);
