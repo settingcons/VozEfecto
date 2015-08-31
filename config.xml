@@ -56,6 +56,28 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+
+    <!-- ocultar statusbar en ios -->
+    <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.2.0" />
+
+    <gap:plugin name="settingconsultoria.cordova.plugins.diagnostic" version="0.0.1" />
+
+    <feature name="Diagnostic" >
+        <param name="ios-package" value="Diagnostic" />
+        <param name="android-package" value="cordova.plugins.diagnostic"/>
+    </feature>
+
+    <plugin name="SplashScreen" value="”org.apache.cordova.SplashScreen"/>
+
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="ios-package" value="CDVFile" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+        <param name="ios-package" value="CDVFileTransfer" />
+    </feature>
+
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
