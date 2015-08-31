@@ -20,12 +20,19 @@ var app = {
     }
 };
 
-function deviceReady() {
-}
-
-var context = new AudioContext();
+var context;
 var sound;
 var source;
+function deviceReady() {
+    if (! window.AudioContext) {
+        if (! window.webkitAudioContext) {
+            alert('no audiocontext found');
+        }
+        window.AudioContext = window.webkitAudioContext;
+    }
+    context = new AudioContext();
+}
+
 
 function Reproducir1(){
     var v_fichero = _mediaAudioFicheroIOS;
