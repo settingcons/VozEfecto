@@ -27,6 +27,11 @@ var context = new AudioContext();
 var sound;
 var source;
 
+function Reproducir1(){
+    var v_fichero = _mediaAudioFicheroIOS;
+    loadSound(v_fichero);
+}
+
 function Reproducir(){
     alert('Reproducir1');
     var v_fichero = ObtenerFicheroAudio();
