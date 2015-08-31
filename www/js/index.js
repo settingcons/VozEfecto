@@ -61,7 +61,7 @@ function loadSound(url) {
                 alert('ok');
                 sound = buffer;
                 playSound(sound);
-            });
+            },ErrorLoad);
         }
 //        request.onload = function () {
 //            // request.response is encoded... so decode it now
@@ -80,6 +80,9 @@ function loadSound(url) {
     catch (ex){alert('loadSound: '+ex.message);}
 }
 
+function ErrorLoad(e) {
+    alert(e.message);
+}
 function playSound(buffer) {
     source = context.createBufferSource();
     source.buffer = buffer;
