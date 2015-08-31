@@ -24,13 +24,11 @@ var context;
 var sound;
 var source;
 function deviceReady() {
-    if (! window.AudioContext) {
-        if (! window.webkitAudioContext) {
-            alert('no audiocontext found');
-        }
-        window.AudioContext = window.webkitAudioContext;
+    try {
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
     }
-    context = new AudioContext();
+    catch (ex){alert('deviceReady: '+ex.message);}
 }
 
 
