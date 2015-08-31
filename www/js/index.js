@@ -59,6 +59,7 @@ function loadSound(url) {
                 alert('ok');
                 sound = buffer;
                 playSound(sound);
+                alert('Después playSound');
             },ErrorLoad);
         }
 //        request.onload = function () {
@@ -83,11 +84,12 @@ function ErrorLoad(e) {
 }
 function playSound(buffer) {
     alert('entra playSound');
-    alert(buffer);
     source = context.createBufferSource();
     source.buffer = buffer;
     source.connect(context.destination);
+    alert('Antes start');
     source.start(0);
+    alert('Después start');
 }
 
 function parar(){
