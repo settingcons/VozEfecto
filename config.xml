@@ -9,10 +9,12 @@
     </author>
     <content src="index.html" />
     <preference name="permissions" value="none" />
+    <!-- si se utiliza la versión de phonegap 3.6.3 no funciona la geolocalización -->
     <preference name="phonegap-version" value="3.5.0" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
-    <preference name="fullscreen" value="true" />
+    <!--si se pone fullscreen a true se oculta la barra de estado de la parte superior -->
+    <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />
     <preference name="prerendered-icon" value="true" />
     <preference name="stay-in-webview" value="false" />
@@ -20,7 +22,7 @@
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
     <preference name="show-splash-screen-spinner" value="true" />
-    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="auto-hide-splash-screen" value="false" />
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
@@ -32,12 +34,21 @@
     <feature name="http://api.phonegap.com/1.0/media"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
-
-    <feature name="Media">
-        <param name="ios-package" value="CDVSound" />
-        <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
     </feature>
-
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+        <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+    </feature>
+    <feature name="Media">
+        <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
+        <param name="ios-package" value="CDVSound" />
+    </feature>
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
@@ -49,14 +60,15 @@
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
-    <gap:plugin name="org.apache.cordova.geolocation" />
+    <!-- si se utiliza otra versión no funciona la geolocalización -->
+    <gap:plugin name="org.apache.cordova.geolocation" version="0.3.7" />
     <gap:plugin name="org.apache.cordova.globalization" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.media" />
     <gap:plugin name="org.apache.cordova.network-information" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
 
+<<<<<<< HEAD
     <!-- ocultar statusbar en ios -->
     <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.2.0" />
 
@@ -69,6 +81,9 @@
 
     <plugin name="SplashScreen" value="”org.apache.cordova.SplashScreen"/>
 
+=======
+    <plugin name="SplashScreen" value="”org.apache.cordova.SplashScreen"/>
+>>>>>>> origin/master
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="ios-package" value="CDVFile" />
