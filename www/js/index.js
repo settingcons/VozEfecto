@@ -47,7 +47,9 @@ function loadSound(url) {
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
 
+        alert('loadSound1');
         request.onload = function() {
+            alert('loadSound2');
             context.decodeAudioData(request.response, function(buffer) {
                 alert('ok');
                 sound = buffer;
