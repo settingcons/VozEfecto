@@ -30,8 +30,8 @@ function deviceReady() {
         {
 
             //Crear fichero audio
-            window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
-            //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
+            //window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
 
         }
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -44,7 +44,7 @@ function deviceReady() {
 
 function Reproducir1(){
     alert('Reproducir1');
-    var v_fichero = _mediaAudioFicheroIOS;
+    var v_fichero ="testaudio.wav";
     loadSound(v_fichero);
 }
 
