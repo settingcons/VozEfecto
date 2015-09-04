@@ -25,7 +25,16 @@ var sound;
 var source;
 function deviceReady() {
     try {
-        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
+        if(esIOS())
+        {
+
+            //Crear fichero audio
+            window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
+
+        }
+
+        //window.AudioContext = window.AudioContext || window.webkitAudioContext;
         context = new AudioContext();
     }
     catch (ex){alert('deviceReady: '+ex.message);}
@@ -59,7 +68,6 @@ function loadSound(url) {
                 alert('ok');
                 sound = buffer;
                 playSound(sound);
-                alert('Después playSound');
             },ErrorLoad);
         }
 //        request.onload = function () {
@@ -83,13 +91,10 @@ function ErrorLoad(e) {
     alert(e.message);
 }
 function playSound(buffer) {
-    alert('entra playSound');
     source = context.createBufferSource();
     source.buffer = buffer;
     source.connect(context.destination);
-    alert('Antes start');
     source.start(0);
-    alert('Después start');
 }
 
 function parar(){
