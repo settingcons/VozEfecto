@@ -108,11 +108,12 @@ function MostrarAudioReproducir(){
 function AudioReproducir(){
     try {
 
-        if (_inciAudioFichero != '') {
+        //if (_inciAudioFichero != '') {
 
             //Iniciar Reprodución
             //var v_src="data:audio/mpeg;base64," +_inciAudioFichero;
             var v_fichero = ObtenerFicheroAudio();
+            alert(v_fichero);
             _mediaAudio = new Media(v_fichero, onSuccessAudioPlay, onErrorAudioPlay);
             _mediaAudio.play();
             if (_mediaTimer == null) {
@@ -133,7 +134,7 @@ function AudioReproducir(){
                     );
                 }, 1000);
             }
-        }
+        //}
     }
     catch (ex){mensaje(ex.message,'Error AudioReproducir')}
 
@@ -224,7 +225,7 @@ function TransformarFicheroAudioToBase64IOS(file) {
         _inciAudioFichero = evt.target.result;
         _inciAudioFichero  =   _inciAudioFichero.toString().substring(_inciAudioFichero.toString().indexOf(",")+1);
         alert('fichero creado');
-        alert('file.src');
+        alert(file.src);
         //var imagen = document.getElementById('imgAudioPlay');
         //imagen.src = "images/play_red.png";
     };

@@ -59,6 +59,11 @@ function loadSound(url) {
         alert(url);
         //var sound;
 
+        if(_mediaAudio!=null)
+        {
+            _mediaAudio=null;
+
+        }
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         context = new AudioContext();
 
