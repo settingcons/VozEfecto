@@ -112,8 +112,12 @@ function AudioReproducir(){
 
             //Iniciar Reprodución
             //var v_src="data:audio/mpeg;base64," +_inciAudioFichero;
-            var v_fichero = ObtenerFicheroAudio();
-            alert(v_fichero);
+            //var v_fichero = ObtenerFicheroAudio();
+        var v_fichero = _mediaAudioFicheroIOS;
+        var v_dir=window.rootFS.toURL();
+        v_dir=v_dir.substring("file://".length);
+        alert(v_dir);
+        v_fichero=v_dir+v_fichero;
         _mediaAudio = new Media(v_fichero, onSuccessAudioPlay, onErrorAudioPlay);
             _mediaAudio.play();
             if (_mediaTimer == null) {
