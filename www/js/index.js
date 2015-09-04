@@ -49,7 +49,6 @@ function Reproducir1(){
 function Reproducir(){
     alert('Reproducir');
     var v_fichero = ObtenerFicheroAudio();
-    v_fichero=workingDirectory.toNativeURL()+v_fichero;
     loadSound(v_fichero);
 }
 
