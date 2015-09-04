@@ -207,6 +207,23 @@ function CrearFicheroAudioIOSError(error) {
 
 function CrearFicheroAudioIOSCorrecto(fileEntry) {
     _mediaAudioFicheroIOSFullPath=fileEntry.fullPath;
+    try{
+        alert(fileEntry.toURL);
+    }
+    catch (ex){}
+    try{
+        alert(fileEntry.toURL());
+    }
+    catch (ex){}
+    try{
+        alert('root: '+fileEntry.root.toURL);
+    }
+    catch (ex){}
+    try{
+        alert('root: '+fileEntry.root.toURL());
+    }
+    catch (ex){}
+
 
 }
 
