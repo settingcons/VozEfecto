@@ -48,7 +48,8 @@ function Reproducir1(){
 
 function Reproducir(){
     alert('Reproducir');
-    var v_fichero = ObtenerFicheroAudio();
+    //var v_fichero = ObtenerFicheroAudio();
+    var v_fichero = _mediaAudioFicheroIOS;
     var v_dir=window.rootFS.toURL();
     v_dir=v_dir.substring("file://".length);
     alert(v_dir);
@@ -78,12 +79,16 @@ function loadSound(url) {
         alert('loadSound1');
         request.onload = function() {
             alert('loadSound2');
-            context.decodeAudioData(request.response, function(buffer) {
-                alert('ok');
-                //sound = buffer;
-                alert('ok1');
-                playSound(buffer);
-            },ErrorLoad);
+            try
+            {
+                context.decodeAudioData(request.response, function(buffer) {
+                    alert('ok');
+                    //sound = buffer;
+                    alert('ok1');
+                    playSound(buffer);
+                },ErrorLoad);
+            }
+            catch (ex){mensaje(ex.message,"ERROR on load")}
         }
 //        request.onload = function () {
 //            // request.response is encoded... so decode it now
