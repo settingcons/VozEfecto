@@ -25,17 +25,18 @@ var sound;
 var source;
 function deviceReady() {
     try {
+        //window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
 
         if(esIOS())
         {
 
             //Crear fichero audio
-            window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
+            //window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
 
         }
 
-        //window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        context = new AudioContext();
     }
     catch (ex){alert('deviceReady: '+ex.message);}
 }

@@ -18,8 +18,8 @@ function AudioGrabacionConfirma() {
         var v_titulo = "Gravació";
         var v_botones = "Finalitzar,Descartar";
 
-        var v_imagen = document.getElementById('imgAudioPlay');
-        v_imagen.src = "images/play_gray.png";
+        //var v_imagen = document.getElementById('imgAudioPlay');
+        //v_imagen.src = "images/play_gray.png";
 
         //Iniciar Grabación
         var v_fichero=ObtenerFicheroAudio();
@@ -57,7 +57,8 @@ function AudioGrabacion(respuesta){
         if (respuesta==1) {
             if(esIOS())
             {
-                window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, ConvertirFicheroAudioToBase64IOS, onErrorAudio);
+                //window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, ConvertirFicheroAudioToBase64IOS, onErrorAudio);
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, ConvertirFicheroAudioToBase64IOS, onErrorAudio);
 
             }
             else {
@@ -66,8 +67,8 @@ function AudioGrabacion(respuesta){
         }
         else{
             _inciAudioFichero='';
-            var imagen = document.getElementById('buttonAudioPlay');
-            imagen.src = "images/play_gray.png";
+            //var imagen = document.getElementById('buttonAudioPlay');
+            //imagen.src = "images/play_gray.png";
         }
     }
     catch (ex){mensaje(ex.message,"error");}
@@ -90,8 +91,8 @@ function TransformarFicheroAudioToBase64(file) {
     reader.onloadend = function(evt) {
         _inciAudioFichero = evt.target.result;
         _inciAudioFichero  =   _inciAudioFichero.toString().substring(_inciAudioFichero.toString().indexOf(",")+1);
-        var imagen = document.getElementById('imgAudioPlay');
-        imagen.src = "images/play_red.png";
+        //var imagen = document.getElementById('imgAudioPlay');
+        //imagen.src = "images/play_red.png";
     };
     reader.readAsDataURL(file);
 }
@@ -107,10 +108,6 @@ function MostrarAudioReproducir(){
 function AudioReproducir(){
 
     if (_inciAudioFichero !=''){
-        //var v_imagen1 = document.getElementById('imgAudioPlayPlay');
-        //v_imagen1.src = "images/play_gray.png";
-        //var v_imagen2 = document.getElementById('imgAudioPlayStop');
-        //v_imagen2.src = "images/play_gray.png";
 
         //Iniciar Reprodución
         //var v_src="data:audio/mpeg;base64," +_inciAudioFichero;
@@ -140,8 +137,8 @@ function AudioReproducir(){
 }
 
 function setAudioPosition(position) {
-    document.getElementById('audio_position').innerHTML = position;
-    document.getElementById('audio_position').style.color='#b80529';
+    //document.getElementById('audio_position').innerHTML = position;
+    //document.getElementById('audio_position').style.color='#b80529';
 }
 
 function onSuccessAudioPlay() {
@@ -174,7 +171,7 @@ function cerrarAudio() {
     }
     _mediaAudio=null;
     _mediaTimer=null;
-    $('#divDatosIncidenciaAudioPlay').hide();
+    //$('#divDatosIncidenciaAudioPlay').hide();
 }
 
 //--------------------------------------------------------------------------------------------
@@ -182,7 +179,11 @@ function cerrarAudio() {
 //--------------------------------------------------------------------------------------------
 function ErrorCrearFicheroAudioIOS() {
     if(error!=null && error.message!=null) {
-        mensaje("Error creació fitxer audio:\n"+error.message, "error");
+        mensaje(error.message, "Error creació fitxer audio");
+    }
+    else
+    {
+        mensaje(error, "Error creació fitxer audio");
     }
 }
 function CrearFicheroAudioIOS(fileSystem) {
@@ -219,8 +220,8 @@ function TransformarFicheroAudioToBase64IOS(file) {
     reader.onloadend = function(evt) {
         _inciAudioFichero = evt.target.result;
         _inciAudioFichero  =   _inciAudioFichero.toString().substring(_inciAudioFichero.toString().indexOf(",")+1);
-        var imagen = document.getElementById('imgAudioPlay');
-        imagen.src = "images/play_red.png";
+        //var imagen = document.getElementById('imgAudioPlay');
+        //imagen.src = "images/play_red.png";
     };
     reader.readAsDataURL(file);
 }
