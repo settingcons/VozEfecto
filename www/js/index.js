@@ -51,8 +51,13 @@ function Reproducir(){
     alert(window.location.href);
     //var v_fichero = ObtenerFicheroAudio();
     var v_fichero = _mediaAudioFicheroIOS;
-    var v_dir=window.rootFS.toURL();
+
+    //var v_dir=window.rootFS.toURL();
+    //v_dir=v_dir.substring("file://".length);
+    var v_dir =window.location.href;
     v_dir=v_dir.substring("file://".length);
+    v_dir = v_dir.substring(0, v_dir.indexOf("/VozEfectoTEST.app/www/index.html"))
+    v_dir=v_dir+"/Documents/";
     alert(v_dir);
     v_fichero=v_dir+v_fichero;
     loadSound(v_fichero);
