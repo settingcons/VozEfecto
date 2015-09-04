@@ -77,7 +77,7 @@ function AudioGrabacion(respuesta){
 
 function ConvertirFicheroAudioToBase64(fileSystem) {
     try{
-        alert(fileSystem.root);
+        alert(fileSystem.root.fullPath);
         window.rootFS=fileSystem.root;
     }
     catch(ex){mensaje(ex.message,"ERROR root")}
