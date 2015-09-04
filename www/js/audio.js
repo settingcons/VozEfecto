@@ -114,7 +114,9 @@ function AudioReproducir(){
             //var v_src="data:audio/mpeg;base64," +_inciAudioFichero;
             var v_fichero = ObtenerFicheroAudio();
             alert(v_fichero);
-            _mediaAudio = new Media(v_fichero, onSuccessAudioPlay, onErrorAudioPlay);
+        v_fichero=workingDirectory.toNativeURL()+v_fichero;
+        alert(v_fichero);
+        _mediaAudio = new Media(v_fichero, onSuccessAudioPlay, onErrorAudioPlay);
             _mediaAudio.play();
             if (_mediaTimer == null) {
                 _mediaTimer = setInterval(function () {
@@ -225,7 +227,7 @@ function TransformarFicheroAudioToBase64IOS(file) {
         _inciAudioFichero = evt.target.result;
         _inciAudioFichero  =   _inciAudioFichero.toString().substring(_inciAudioFichero.toString().indexOf(",")+1);
         alert('fichero creado');
-        alert(file.src);
+        alert(file.toURL);
         //var imagen = document.getElementById('imgAudioPlay');
         //imagen.src = "images/play_red.png";
     };
