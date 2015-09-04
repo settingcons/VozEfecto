@@ -223,6 +223,8 @@ function TransformarFicheroAudioToBase64IOS(file) {
     reader.onloadend = function(evt) {
         _inciAudioFichero = evt.target.result;
         _inciAudioFichero  =   _inciAudioFichero.toString().substring(_inciAudioFichero.toString().indexOf(",")+1);
+        alert('fichero creado');
+        alert('file.src');
         //var imagen = document.getElementById('imgAudioPlay');
         //imagen.src = "images/play_red.png";
     };

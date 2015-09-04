@@ -21,7 +21,7 @@ var app = {
 };
 
 var context;
-var sound;
+//var sound;
 var source;
 function deviceReady() {
     try {
@@ -34,8 +34,6 @@ function deviceReady() {
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
 
         }
-        window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        context = new AudioContext();
 
     }
     catch (ex){alert('deviceReady: '+ex.message);}
@@ -59,6 +57,11 @@ function Reproducir(){
 function loadSound(url) {
     try {
         alert(url);
+        //var sound;
+
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
+
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
@@ -68,8 +71,9 @@ function loadSound(url) {
             alert('loadSound2');
             context.decodeAudioData(request.response, function(buffer) {
                 alert('ok');
-                sound = buffer;
-                playSound(sound);
+                //sound = buffer;
+                alert('ok1');
+                playSound(buffer);
             },ErrorLoad);
         }
 //        request.onload = function () {
@@ -90,13 +94,17 @@ function loadSound(url) {
 }
 
 function ErrorLoad(e) {
-    alert(e.message);
+    mensaje(e.message,'ErrorLoad');
 }
 function playSound(buffer) {
-    source = context.createBufferSource();
-    source.buffer = buffer;
-    source.connect(context.destination);
-    source.start(0);
+    try {
+        alert('playSound');
+        source = context.createBufferSource();
+        source.buffer = buffer;
+        source.connect(context.destination);
+        source.start(0);
+    }
+    catch (ex){mensaje(ex.message,'ERROR playSound');}
 }
 
 function parar(){
