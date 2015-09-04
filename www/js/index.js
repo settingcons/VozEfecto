@@ -49,6 +49,8 @@ function Reproducir1(){
 function Reproducir(){
     alert('Reproducir');
     var v_fichero = ObtenerFicheroAudio();
+    alert(window.rootFS.fullPath);
+    v_fichero=window.rootFS.fullPath+v_fichero;
     loadSound(v_fichero);
 }
 
