@@ -54,6 +54,7 @@ function Reproducir(){
 
     var v_dir=window.rootFS.toURL();
     v_dir=v_dir.substring("file://".length);
+    v_dir=v_dir+'tmp/'
     //var v_dir =window.location.href;
     //v_dir=v_dir.substring("file://".length);
     //v_dir = v_dir.substring(0, v_dir.indexOf("/VozEfectoTEST.app/www/index.html"))
