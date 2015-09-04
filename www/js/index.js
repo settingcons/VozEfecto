@@ -30,8 +30,8 @@ function deviceReady() {
         {
 
             //Crear fichero audio
-            window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
-            //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
+            //window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
 
         }
 
@@ -48,6 +48,7 @@ function Reproducir1(){
 
 function Reproducir(){
     alert('Reproducir');
+    alert(window.location.href);
     //var v_fichero = ObtenerFicheroAudio();
     var v_fichero = _mediaAudioFicheroIOS;
     var v_dir=window.rootFS.toURL();
