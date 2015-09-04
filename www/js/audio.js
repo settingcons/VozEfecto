@@ -76,11 +76,6 @@ function AudioGrabacion(respuesta){
 }
 
 function ConvertirFicheroAudioToBase64(fileSystem) {
-    try{
-        alert(fileSystem.root.fullPath);
-        window.rootFS=fileSystem.root;
-    }
-    catch(ex){mensaje(ex.message,"ERROR root")}
     fileSystem.root.getFile(_mediaAudioFichero, null, LeerFicheroAudio, onErrorAudio);
 }
 function LeerFicheroAudio(fileEntry) {
@@ -196,6 +191,11 @@ function ErrorCrearFicheroAudioIOS() {
     }
 }
 function CrearFicheroAudioIOS(fileSystem) {
+    try{
+        alert(fileSystem.root.fullPath);
+        window.rootFS=fileSystem.root;
+    }
+    catch(ex){mensaje(ex.message,"ERROR root")}
     fileSystem.root.getFile(_mediaAudioFicheroIOS, {create: true, exclusive: false}, CrearFicheroAudioIOSCorrecto, CrearFicheroAudioIOSError);
 }
 
