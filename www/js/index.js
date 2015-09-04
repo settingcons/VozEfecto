@@ -34,6 +34,8 @@ function deviceReady() {
             //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
 
         }
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
 
     }
     catch (ex){alert('deviceReady: '+ex.message);}
@@ -41,16 +43,13 @@ function deviceReady() {
 
 
 function Reproducir1(){
-    //window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    context = new AudioContext();
+    alert('Reproducir1');
     var v_fichero = _mediaAudioFicheroIOS;
     loadSound(v_fichero);
 }
 
 function Reproducir(){
-    //window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    context = new AudioContext();
-    alert('Reproducir1');
+    alert('Reproducir');
     var v_fichero = ObtenerFicheroAudio();
     loadSound(v_fichero);
 }

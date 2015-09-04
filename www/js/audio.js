@@ -106,33 +106,36 @@ function MostrarAudioReproducir(){
     }
 }
 function AudioReproducir(){
+    try {
 
-    if (_inciAudioFichero !=''){
+        if (_inciAudioFichero != '') {
 
-        //Iniciar Reprodución
-        //var v_src="data:audio/mpeg;base64," +_inciAudioFichero;
-        var v_fichero = ObtenerFicheroAudio();
-        _mediaAudio = new Media(v_fichero,onSuccessAudioPlay,onErrorAudioPlay);
-        _mediaAudio.play();
-        if (_mediaTimer == null) {
-            _mediaTimer = setInterval(function() {
-                // get my_media position
-                _mediaAudio.getCurrentPosition(
-                    // success callback
-                    function(position) {
-                        if (position > -1) {
-                            var iPos = parseInt(position);
-                            setAudioPosition(iPos+" seg.");
+            //Iniciar Reprodución
+            //var v_src="data:audio/mpeg;base64," +_inciAudioFichero;
+            var v_fichero = ObtenerFicheroAudio();
+            _mediaAudio = new Media(v_fichero, onSuccessAudioPlay, onErrorAudioPlay);
+            _mediaAudio.play();
+            if (_mediaTimer == null) {
+                _mediaTimer = setInterval(function () {
+                    // get my_media position
+                    _mediaAudio.getCurrentPosition(
+                        // success callback
+                        function (position) {
+                            if (position > -1) {
+                                var iPos = parseInt(position);
+                                setAudioPosition(iPos + " seg.");
+                            }
+                        },
+                        // error callback
+                        function (e) {
+                            setAudioPosition("Error: " + e.message);
                         }
-                    },
-                    // error callback
-                    function(e) {
-                        setAudioPosition("Error: " + e.message);
-                    }
-                );
-            }, 1000);
+                    );
+                }, 1000);
+            }
         }
     }
+    catch (ex){mensaje(ex.message,'Error AudioReproducir')}
 
 }
 
