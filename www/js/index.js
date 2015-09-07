@@ -39,7 +39,7 @@ function deviceReady() {
     }
     catch (ex){alert('deviceReady: '+ex.message);}
 }
-
+ 
 
 function Reproducir1(){
     alert('Reproducir1');
