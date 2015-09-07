@@ -68,7 +68,9 @@ function Reproducir2(){
         alert('Reproducir2');
 
         alert(_inciAudioFichero2);
-        context.decodeAudioData(_inciAudioFichero2, function(buffer) {
+        var v_buff=toArrayBuffer(_inciAudioFichero2);
+
+        context.decodeAudioData(v_buff, function(buffer) {
             alert('ok');
             //sound = buffer;
             alert('ok1');
@@ -82,7 +84,8 @@ function Reproducir3(){
         alert('Reproducir3');
 
         alert(_inciAudioFichero);
-        context.decodeAudioData(_inciAudioFichero, function(buffer) {
+        var v_buff=toArrayBuffer(_inciAudioFichero);
+        context.decodeAudioData(v_buff, function(buffer) {
             alert('ok');
             //sound = buffer;
             alert('ok1');
@@ -92,6 +95,14 @@ function Reproducir3(){
     catch (ex){mensaje(ex.message,'Reproducir3');}
 }
 
+function toArrayBuffer(buffer) {
+    var ab = new ArrayBuffer(buffer.length);
+    var view = new Uint8Array(ab);
+    for (var i = 0; i < buffer.length; ++i) {
+        view[i] = buffer[i];
+    }
+    return ab;
+}
 
 function loadSound(url) {
     try {
