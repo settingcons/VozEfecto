@@ -68,9 +68,9 @@ function Reproducir2(){
         alert('Reproducir2');
 
         alert(_inciAudioFichero2);
-        var v_buff=toArrayBuffer(_inciAudioFichero2);
+        //var v_buff=toArrayBuffer(_inciAudioFichero2);
 
-        context.decodeAudioData(v_buff, function(buffer) {
+        context.decodeAudioData(_inciAudioFichero2, function(buffer) {
             alert('ok');
             //sound = buffer;
             alert('ok1');
