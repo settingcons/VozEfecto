@@ -35,7 +35,7 @@ function deviceReady() {
 
         }
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
+        context = new AudioContext();
     }
     catch (ex){alert('deviceReady: '+ex.message);}
 }
@@ -71,10 +71,10 @@ function Reproducir2(){
 
         alert(_inciAudioFichero2);
         //var v_buff=toArrayBuffer(_inciAudioFichero2);
-        if(context!=null){
-            context.close().then(function(){alert('cerrado');context = new AudioContext();});
-        }
-        else{context = new AudioContext();}
+        //if(context!=null){
+        //    context.close().then(function(){alert('cerrado');context = new AudioContext();});
+        //}
+        //else{context = new AudioContext();}
 
         context.decodeAudioData(_inciAudioFichero2, function(buffer) {
             alert('ok');
@@ -92,10 +92,10 @@ function loadSound(url) {
 
         limpiarMedia();
 
-        if(context!=null){
-            context.close().then(function(){alert('cerrado');context = new AudioContext();});
-        }
-        else{context = new AudioContext();}
+        //if(context!=null){
+        //    context.close().then(function(){alert('cerrado');context = new AudioContext();});
+        //}
+        //else{context = new AudioContext();}
 
 
         var request = new XMLHttpRequest();
