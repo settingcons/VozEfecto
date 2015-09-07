@@ -34,6 +34,8 @@ function deviceReady() {
             //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
 
         }
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
 
     }
     catch (ex){alert('deviceReady: '+ex.message);}
@@ -79,43 +81,16 @@ function Reproducir2(){
     }
     catch (ex){mensaje(ex.message,'Reproducir2');}
 }
-function Reproducir3(){
-    try{
-        alert('Reproducir3');
-
-        alert(_inciAudioFichero);
-        var v_buff=toArrayBuffer(_inciAudioFichero);
-        context.decodeAudioData(v_buff, function(buffer) {
-            alert('ok');
-            //sound = buffer;
-            alert('ok1');
-            playSound(buffer);
-        },ErrorLoad);
-    }
-    catch (ex){mensaje(ex.message,'Reproducir3');}
-}
-
-function toArrayBuffer(buffer) {
-    var ab = new ArrayBuffer(buffer.length);
-    var view = new Uint8Array(ab);
-    for (var i = 0; i < buffer.length; ++i) {
-        view[i] = buffer[i];
-    }
-    return ab;
-}
 
 function loadSound(url) {
     try {
         alert(url);
-        //var sound;
 
-        if(_mediaAudio!=null)
-        {
-            _mediaAudio=null;
-
+        if(_mediaAudio!=null && _mediaAudio) {
+            _mediaAudio.stop();
         }
-        window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        context = new AudioContext();
+        _mediaAudio=null;
+
 
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -130,23 +105,11 @@ function loadSound(url) {
                 context.decodeAudioData(request.response, function(buffer) {
                     alert('ok');
                     //sound = buffer;
-                    alert('ok1');
                     playSound(buffer);
                 },ErrorLoad);
             }
             catch (ex){mensaje(ex.message,"ERROR on load")}
         }
-//        request.onload = function () {
-//            // request.response is encoded... so decode it now
-//            alert('antes');
-//            context.decodeAudioData(request.response, function (buffer) {
-//alert('ok');
-//                sound = buffer;
-//            }, function (err) {
-//                alert('error');
-//                alert(err.message);
-//            });
-//        }
 
         request.send();
     }
