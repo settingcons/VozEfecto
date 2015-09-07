@@ -35,7 +35,7 @@ function deviceReady() {
 
         }
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        context = new AudioContext();
+
     }
     catch (ex){alert('deviceReady: '+ex.message);}
 }
@@ -71,22 +71,12 @@ function Reproducir2(){
 
         alert(_inciAudioFichero2);
         //var v_buff=toArrayBuffer(_inciAudioFichero2);
-        //if(context!=null){
-        //    context.close().then(function(){alert('cerrado');context = new AudioContext();});
-        //}
-        //else{context = new AudioContext();}
+        context = new AudioContext();
 
-        var context1 = new AudioContext();
-        context1.decodeAudioData(_inciAudioFichero2, function(buffer) {
+        context.decodeAudioData(_inciAudioFichero2, function(buffer) {
             alert('ok');
             //sound = buffer;
-            //alert('ok1');
-            //playSound(buffer);
-            var source = context.createBufferSource();
-            source.buffer = buffer;
-            source.connect(context.destination);
-            source.start(0);
-
+            playSound(buffer);
         },ErrorLoad);
     }
     catch (ex){mensaje(ex.message,'Reproducir2');}
@@ -98,10 +88,7 @@ function loadSound(url) {
 
         limpiarMedia();
 
-        //if(context!=null){
-        //    context.close().then(function(){alert('cerrado');context = new AudioContext();});
-        //}
-        //else{context = new AudioContext();}
+        context = new AudioContext();
 
 
         var request = new XMLHttpRequest();
@@ -136,6 +123,7 @@ function limpiarMedia()
 
         _mediaAudio = new Media(v_fichero, onSuccessAudioPlay, onErrorAudioPlay);
         if (_mediaAudio != null && _mediaAudio) {
+            _mediaAudio.play();
             _mediaAudio.stop();
         }
         _mediaAudio = null;
@@ -155,6 +143,7 @@ function playSound(buffer) {
         source.buffer = buffer;
         source.connect(context.destination);
         source.start(0);
+        alert('playSound fin');
     }
     catch (ex){mensaje(ex.message,'ERROR playSound');}
 }
