@@ -53,7 +53,7 @@ function Reproducir(){
     var v_fichero = _mediaAudioFicheroIOS;
 
     var v_dir=window.rootFS.toURL();
-    //v_dir=v_dir.substring("file://".length);
+    v_dir=v_dir.substring("file://".length);
     //v_dir=v_dir+'tmp/'
     //var v_dir =window.location.href;
     //v_dir=v_dir.substring("file://".length);
@@ -64,6 +64,34 @@ function Reproducir(){
     loadSound(v_fichero);
 }
 
+function Reproducir2(){
+    try{
+        alert('Reproducir2');
+
+        alert(_inciAudioFichero2);
+        context.decodeAudioData(_inciAudioFichero2, function(buffer) {
+            alert('ok');
+            //sound = buffer;
+            alert('ok1');
+            playSound(buffer);
+        },ErrorLoad);
+    }
+    catch (ex){mensaje(ex.message,'Reproducir2');}
+}
+function Reproducir3(){
+    try{
+        alert('Reproducir3');
+
+        alert(_inciAudioFichero);
+        context.decodeAudioData(_inciAudioFichero, function(buffer) {
+            alert('ok');
+            //sound = buffer;
+            alert('ok1');
+            playSound(buffer);
+        },ErrorLoad);
+    }
+    catch (ex){mensaje(ex.message,'Reproducir3');}
+}
 
 
 function loadSound(url) {
@@ -116,6 +144,8 @@ function loadSound(url) {
 }
 
 function ErrorLoad(e) {
+    alert('ErrorLoad');
+    alert(e);
     mensaje(e.message,'ErrorLoad');
 }
 function playSound(buffer) {

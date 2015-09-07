@@ -227,8 +227,8 @@ function TransformarFicheroAudioToBase64IOS(file) {
     file.type='audio/wav';
     var reader = new FileReader();
     reader.onloadend = function(evt) {
-        _inciAudioFichero = evt.target.result;
-        _inciAudioFichero  =   _inciAudioFichero.toString().substring(_inciAudioFichero.toString().indexOf(",")+1);
+        _inciAudioFichero2 = evt.target.result;
+        _inciAudioFichero  =   _inciAudioFichero2.toString().substring(_inciAudioFichero2.toString().indexOf(",")+1);
         //var imagen = document.getElementById('imgAudioPlay');
         //imagen.src = "images/play_red.png";
     };
