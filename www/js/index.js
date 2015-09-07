@@ -107,10 +107,13 @@ function Reproducir2(){
 
         alert(_inciAudioFichero2);
         //var v_buff=toArrayBuffer(_inciAudioFichero2);
-if(context==null){
-    context = new AudioContext();
-
+if(context!=null){
+    source.stop(0);
+    source.disconnect(0);
+    delete source;
+    context=null;
 }
+        context = new AudioContext();
 
         context.decodeAudioData(_inciAudioFichero2, function(buffer) {
             alert('ok');
@@ -169,7 +172,7 @@ function limpiarMedia()
         if (_mediaAudio != null && _mediaAudio) {
             _mediaAudio.play();
             _mediaAudio.stop();
-            _mediaAudio.release();
+            //_mediaAudio.release();
         }
         _mediaAudio = null;
     }
@@ -195,4 +198,40 @@ function playSound(buffer) {
 
 function pararPlay(){
     source.stop();
+}
+
+
+
+
+function readVocalsToBuffer(file){
+    console.log('readVocalsToBuffer');
+    var reader = new FileReader();
+    reader.onloadend = function(evt){
+        var x = audioContext.decodeAudioData(evt.target._result, function(buffer){
+            if(!buffer){
+                console.log('error decoding file to Audio Buffer');
+                return;
+            }
+            window.voiceBuffer = buffer;
+            loadBuffers();
+        });
+    }
+    reader.readAsArrayBuffer(file);
+}
+
+function loadBuffers(){
+    //console.log('loadBuffers');
+    try{
+        var bufferLoader = new BufferLoader(
+            audioContext,
+            [
+                "."+window.srcSong
+            ],
+            createOffLineContext
+        );
+        bufferLoader.load()
+    }
+    catch(e){
+        console.log(e.message);
+    }
 }
