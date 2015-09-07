@@ -169,6 +169,7 @@ function limpiarMedia()
         if (_mediaAudio != null && _mediaAudio) {
             _mediaAudio.play();
             _mediaAudio.stop();
+            _mediaAudio.release();
         }
         _mediaAudio = null;
     }
