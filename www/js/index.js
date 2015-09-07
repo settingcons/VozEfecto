@@ -35,7 +35,6 @@ function deviceReady() {
 
         }
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        context = new AudioContext();
 
     }
     catch (ex){alert('deviceReady: '+ex.message);}
@@ -68,9 +67,11 @@ function Reproducir(){
 function Reproducir2(){
     try{
         alert('Reproducir2');
+        limpiarMedia();
 
         alert(_inciAudioFichero2);
         //var v_buff=toArrayBuffer(_inciAudioFichero2);
+        context = new AudioContext();
 
         context.decodeAudioData(_inciAudioFichero2, function(buffer) {
             alert('ok');
@@ -86,11 +87,9 @@ function loadSound(url) {
     try {
         alert(url);
 
-        if(_mediaAudio!=null && _mediaAudio) {
-            _mediaAudio.stop();
-        }
-        _mediaAudio=null;
+        limpiarMedia();
 
+        context = new AudioContext();
 
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -114,6 +113,21 @@ function loadSound(url) {
         request.send();
     }
     catch (ex){alert('loadSound: '+ex.message);}
+}
+
+function limpiarMedia()
+{
+    try {
+
+        var v_fichero = ObtenerFicheroAudio();
+
+        _mediaAudio = new Media(v_fichero, onSuccessAudioPlay, onErrorAudioPlay);
+        if (_mediaAudio != null && _mediaAudio) {
+            _mediaAudio.stop();
+        }
+        _mediaAudio = null;
+    }
+    catch(ex){mensaje(ex.message,'limpiarMedia');}
 }
 
 function ErrorLoad(e) {
