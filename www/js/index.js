@@ -23,6 +23,8 @@ var app = {
 var context;
 //var sound;
 var source;
+var recorder;
+var urlAudio;
 function deviceReady() {
     try {
 
@@ -34,13 +36,47 @@ function deviceReady() {
             //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
 
         }
+
+        window.URL = window.URL || window.webkitURL;
+        navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
 
     }
     catch (ex){alert('deviceReady: '+ex.message);}
 }
- 
 
+
+function Grabar(){
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({audio: true}, onSuccessGrabar, onFailGrabar);
+    } else {
+        mensaje('navigator.getUserMedia not present','Grabar');
+    }
+
+}
+
+function onSuccessGrabar(s)
+{
+    var mediaStreamSource = context.createMediaStreamSource(s);
+    recorder = new Recorder(mediaStreamSource);
+    recorder.record();
+}
+
+function onFailGrabar(error){
+    mensaje(error,'onFailGrabar');
+}
+
+function Parar(){
+    function stopRecording() {
+        recorder.stop();
+        recorder.exportWAV(function(s) {
+            urlAudio = window.URL.createObjectURL(s);
+            alert(urlAudio);
+        });
+    }
+}
 function Reproducir1(){
     alert('Reproducir1');
     var v_fichero ="testaudio.wav";
@@ -71,7 +107,10 @@ function Reproducir2(){
 
         alert(_inciAudioFichero2);
         //var v_buff=toArrayBuffer(_inciAudioFichero2);
-        context = new AudioContext();
+if(context==null){
+    context = new AudioContext();
+
+}
 
         context.decodeAudioData(_inciAudioFichero2, function(buffer) {
             alert('ok');
@@ -82,13 +121,18 @@ function Reproducir2(){
     catch (ex){mensaje(ex.message,'Reproducir2');}
 }
 
+function Reproducir3()
+{
+    alert('Reproducir3');
+    loadSound(urlAudio);
+}
+
 function loadSound(url) {
     try {
         alert(url);
 
-        limpiarMedia();
+        //limpiarMedia();
 
-        context = new AudioContext();
 
 
         var request = new XMLHttpRequest();
@@ -148,6 +192,6 @@ function playSound(buffer) {
     catch (ex){mensaje(ex.message,'ERROR playSound');}
 }
 
-function parar(){
+function pararPlay(){
     source.stop();
 }
