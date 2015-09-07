@@ -57,8 +57,8 @@ function AudioGrabacion(respuesta){
         if (respuesta==1) {
             if(esIOS())
             {
-                //window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, ConvertirFicheroAudioToBase64IOS, onErrorAudio);
-                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, ConvertirFicheroAudioToBase64IOS, onErrorAudio);
+                window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, ConvertirFicheroAudioToBase64IOS, onErrorAudio);
+                //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, ConvertirFicheroAudioToBase64IOS, onErrorAudio);
 
             }
             else {
