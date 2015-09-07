@@ -76,11 +76,17 @@ function Reproducir2(){
         //}
         //else{context = new AudioContext();}
 
-        context.decodeAudioData(_inciAudioFichero2, function(buffer) {
+        var context1 = new AudioContext();
+        context1.decodeAudioData(_inciAudioFichero2, function(buffer) {
             alert('ok');
             //sound = buffer;
-            alert('ok1');
-            playSound(buffer);
+            //alert('ok1');
+            //playSound(buffer);
+            var source = context.createBufferSource();
+            source.buffer = buffer;
+            source.connect(context.destination);
+            source.start(0);
+
         },ErrorLoad);
     }
     catch (ex){mensaje(ex.message,'Reproducir2');}
