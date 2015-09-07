@@ -63,7 +63,6 @@ function Reproducir(){
     v_fichero=v_dir+v_fichero;
     loadSound(v_fichero);
 }
-
 function Reproducir2(){
     try{
         alert('Reproducir2');
