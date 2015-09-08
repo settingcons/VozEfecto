@@ -41,26 +41,14 @@ function deviceReady() {
             //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudioIOS, ErrorCrearFicheroAudioIOS);
 
         }
+        else{
+            //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, CrearFicheroAudio, ErrorCrearFicheroAudio);
+
+        }
 
 
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-         context = new AudioContext();
-             //songs  = document.getElementById('aVER');
-        //    canvas = document.getElementById('songcanvas'),
-        //    WIDTH  = canvas.width,
-        //    HEIGHT = canvas.height,
-        //// get the context from the canvas to draw on
-        //    ctx = canvas.getContext('2d'),
-        //    gradient = ctx.createLinearGradient(0, 0, 0, HEIGHT),
-        //    bar = { width: 2, gap: 2, ratio: HEIGHT / 256 };
-        //
-        //gradient.addColorStop(1.00,'#000000');
-        //gradient.addColorStop(0.75,'#ff0000');
-        //gradient.addColorStop(0.25,'#ffff00');
-        //gradient.addColorStop(0.00,'#ffff00');
-        //ctx.fillStyle = gradient;
-        //
-        //songs.addEventListener('click', loadSong, false);
+        context = new AudioContext();
 
     }
     catch (ex){alert('deviceReady: '+ex.message);}
@@ -68,85 +56,11 @@ function deviceReady() {
 
 
 
-function Reproducir1(){
-    alert('Reproducir1');
-    var v_fichero ="testaudio.wav";
-    loadSound(v_fichero);
-}
 
-function Reproducir(){
-    alert('Reproducir');
-    //alert(window.location.href);
-    //var v_fichero = ObtenerFicheroAudio();
-    limpiarMedia();
-    var v_fichero = _mediaAudioFicheroIOS;
 
-    var v_dir=window.rootFS.toURL();
-    v_dir=v_dir.substring("file://".length);
-    //v_dir=v_dir+'tmp/'
-    //var v_dir =window.location.href;
-    //v_dir=v_dir.substring("file://".length);
-    //v_dir = v_dir.substring(0, v_dir.indexOf("/VozEfectoTEST.app/www/index.html"))
-    //v_dir=v_dir+"/Documents/";
-    alert(v_dir);
-    v_fichero=v_dir+v_fichero;
-    loadSound(v_fichero);
-}
-function Reproducir2(){
-    try{
-        alert('Reproducir2');
-        limpiarMedia();
-
-        alert(_inciAudioFichero2);
-        //var v_buff=toArrayBuffer(_inciAudioFichero2);
-    if(context!=null) {
-        if (source != null) {
-            //source.stop();
-            source.disconnect();
-            delete source;
-        }
-        delete context;
-    }
-
-        context = new AudioContext();
-
-        context.decodeAudioData(_inciAudioFichero2, function(buffer) {
-            alert('ok');
-            //sound = buffer;
-            playSound(buffer);
-        },ErrorLoad);
-    }
-    catch (ex){mensaje(ex.message,'Reproducir2');}
-}
-
-function Reproducir3()
-{
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    var context = new AudioContext(),
-        audioAnimation, sourceNode, analyser, audio,
-        songs  = document.getElementById('aVER');
-    //    canvas = document.getElementById('songcanvas'),
-    //    WIDTH  = canvas.width,
-    //    HEIGHT = canvas.height,
-    //// get the context from the canvas to draw on
-    //    ctx = canvas.getContext('2d'),
-    //    gradient = ctx.createLinearGradient(0, 0, 0, HEIGHT),
-    //    bar = { width: 2, gap: 2, ratio: HEIGHT / 256 };
-    //
-    //gradient.addColorStop(1.00,'#000000');
-    //gradient.addColorStop(0.75,'#ff0000');
-    //gradient.addColorStop(0.25,'#ffff00');
-    //gradient.addColorStop(0.00,'#ffff00');
-    //ctx.fillStyle = gradient;
-    //
-    songs.addEventListener('click', loadSong, false);
-}
-
-function loadSong() {
+function Reproducir() {
     try {
-        //e.preventDefault();
-        //var url = e.target.href;
-        //if (!url) return false;
+        limpiarMedia();
         alert('1');
         if (audio) audio.remove();
         alert('2');
@@ -155,17 +69,23 @@ function loadSong() {
         alert('3');
         audio = new Audio();
 
-        var v_fichero = _mediaAudioFicheroIOS;
+        if(esIOS()) {
+            alert(3.1);
+            var v_fichero = _mediaAudioFicheroIOS;
 
-        var v_dir = window.rootFS.toURL();
-        v_dir = v_dir.substring("file://".length);
-        v_fichero = v_dir + v_fichero;
-
-        alert('4');
+            var v_dir = window.rootFS.toURL();
+            v_dir = v_dir.substring("file://".length);
+            v_fichero = v_dir + v_fichero;
+        }
+        else
+        {
+            alert(3.2);
+            v_fichero=ObtenerFicheroAudio();
+        }
+        alert(v_fichero);
         audio.src = v_fichero;
         alert('5');
         setupAudioNodes();
-        //audio.addEventListener('canplay', setupAudioNodes, false);
         alert('6');
     }
     catch (ex){mensaje(ex.message,'loadSong');}
@@ -176,7 +96,7 @@ function setupAudioNodes() {
         //analyser = (analyser || context.createAnalyser());
         //analyser.smoothingTimeConstant = 0.8;
         //analyser.fftSize = 512;
-alert(7);
+        alert(7);
         sourceNode = context.createMediaElementSource(audio);
         //sourceNode.connect(analyser);
         alert(8);
