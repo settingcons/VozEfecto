@@ -164,7 +164,8 @@ function loadSong() {
         alert('4');
         audio.src = v_fichero;
         alert('5');
-        audio.addEventListener('canplay', setupAudioNodes, false);
+        setupAudioNodes();
+        //audio.addEventListener('canplay', setupAudioNodes, false);
         alert('6');
     }
     catch (ex){mensaje(ex.message,'loadSong');}
