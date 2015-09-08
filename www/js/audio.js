@@ -193,7 +193,7 @@ function ErrorCrearFicheroAudioIOS() {
 function CrearFicheroAudioIOS(fileSystem) {
     try{
         window.rootFS=fileSystem.root;
-        alert(fileSystem.root.toURL());
+        //alert(fileSystem.root.toURL());
     }
     catch(ex){mensaje(ex.message,"ERROR root")}
     fileSystem.root.getFile(_mediaAudioFicheroIOS, {create: true, exclusive: false}, CrearFicheroAudioIOSCorrecto, CrearFicheroAudioIOSError);

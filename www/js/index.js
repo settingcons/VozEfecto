@@ -61,22 +61,13 @@ function deviceReady() {
 function Reproducir() {
     try {
         limpiarMedia();
-        alert('1');
-        if(esIOS()) {
-            if (audio) audio.remove();
-        }
-        else
-        {
-            if (audio) audio.close();
-        }
-        alert('2');
+
+        if (audio) audio.remove();
         if (sourceNode) sourceNode.disconnect();
         //cancelAnimationFrame(audioAnimation);
-        alert('3');
         audio = new Audio();
 
         if(esIOS()) {
-            alert(3.1);
             var v_fichero = _mediaAudioFicheroIOS;
 
             var v_dir = window.rootFS.toURL();
@@ -85,14 +76,10 @@ function Reproducir() {
         }
         else
         {
-            alert(3.2);
             v_fichero=ObtenerFicheroAudio();
         }
-        alert(v_fichero);
         audio.src = v_fichero;
-        alert('5');
         setupAudioNodes();
-        alert('6');
     }
     catch (ex){mensaje(ex.message,'loadSong');}
 }
@@ -102,16 +89,13 @@ function setupAudioNodes() {
         //analyser = (analyser || context.createAnalyser());
         //analyser.smoothingTimeConstant = 0.8;
         //analyser.fftSize = 512;
-        alert(7);
+
         sourceNode = context.createMediaElementSource(audio);
         //sourceNode.connect(analyser);
-        alert(8);
         sourceNode.connect(context.destination);
 
-        alert(9);
         audio.play();
         //drawSpectrum();
-        alert(10);
     }
     catch (ex){mensaje(ex.message,'setupAudioNodes');}
 }
