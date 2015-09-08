@@ -25,6 +25,11 @@ var context;
 var source;
 var recorder;
 var urlAudio;
+var audioAnimation;
+var sourceNode;
+var analyser;
+var audio;
+var songs;
 function deviceReady() {
     try {
 
@@ -37,46 +42,32 @@ function deviceReady() {
 
         }
 
-        window.URL = window.URL || window.webkitURL;
-        navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        context = new AudioContext();
+         context = new AudioContext(),
+            songs  = document.getElementById('aVER');
+        //    canvas = document.getElementById('songcanvas'),
+        //    WIDTH  = canvas.width,
+        //    HEIGHT = canvas.height,
+        //// get the context from the canvas to draw on
+        //    ctx = canvas.getContext('2d'),
+        //    gradient = ctx.createLinearGradient(0, 0, 0, HEIGHT),
+        //    bar = { width: 2, gap: 2, ratio: HEIGHT / 256 };
+        //
+        //gradient.addColorStop(1.00,'#000000');
+        //gradient.addColorStop(0.75,'#ff0000');
+        //gradient.addColorStop(0.25,'#ffff00');
+        //gradient.addColorStop(0.00,'#ffff00');
+        //ctx.fillStyle = gradient;
+        //
+        songs.addEventListener('click', loadSong, false);
 
     }
     catch (ex){alert('deviceReady: '+ex.message);}
 }
 
 
-function Grabar(){
-    if (navigator.getUserMedia) {
-        navigator.getUserMedia({audio: true}, onSuccessGrabar, onFailGrabar);
-    } else {
-        mensaje('navigator.getUserMedia not present','Grabar');
-    }
 
-}
-
-function onSuccessGrabar(s)
-{
-    var mediaStreamSource = context.createMediaStreamSource(s);
-    recorder = new Recorder(mediaStreamSource);
-    recorder.record();
-}
-
-function onFailGrabar(error){
-    mensaje(error,'onFailGrabar');
-}
-
-function Parar(){
-    function stopRecording() {
-        recorder.stop();
-        recorder.exportWAV(function(s) {
-            urlAudio = window.URL.createObjectURL(s);
-            alert(urlAudio);
-        });
-    }
-}
 function Reproducir1(){
     alert('Reproducir1');
     var v_fichero ="testaudio.wav";
@@ -130,10 +121,82 @@ function Reproducir2(){
 
 function Reproducir3()
 {
-    alert('Reproducir3');
-    loadSound(urlAudio);
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    var context = new AudioContext(),
+        audioAnimation, sourceNode, analyser, audio,
+        songs  = document.getElementById('aVER');
+    //    canvas = document.getElementById('songcanvas'),
+    //    WIDTH  = canvas.width,
+    //    HEIGHT = canvas.height,
+    //// get the context from the canvas to draw on
+    //    ctx = canvas.getContext('2d'),
+    //    gradient = ctx.createLinearGradient(0, 0, 0, HEIGHT),
+    //    bar = { width: 2, gap: 2, ratio: HEIGHT / 256 };
+    //
+    //gradient.addColorStop(1.00,'#000000');
+    //gradient.addColorStop(0.75,'#ff0000');
+    //gradient.addColorStop(0.25,'#ffff00');
+    //gradient.addColorStop(0.00,'#ffff00');
+    //ctx.fillStyle = gradient;
+    //
+    songs.addEventListener('click', loadSong, false);
 }
 
+function loadSong(e) {
+    try {
+        e.preventDefault();
+        //var url = e.target.href;
+        //if (!url) return false;
+        alert('1');
+        if (audio) audio.remove();
+        alert('2');
+        if (sourceNode) sourceNode.disconnect();
+        //cancelAnimationFrame(audioAnimation);
+        alert('3');
+        audio = new Audio();
+
+        var v_fichero = _mediaAudioFicheroIOS;
+
+        var v_dir = window.rootFS.toURL();
+        v_dir = v_dir.substring("file://".length);
+        v_fichero = v_dir + v_fichero;
+
+        alert('4');
+        audio.src = v_fichero;
+        alert('5');
+        audio.addEventListener('canplay', setupAudioNodes, false);
+        alert('6');
+    }
+    catch (ex){mensaje(ex.message,'loadSong');}
+}
+
+function setupAudioNodes() {
+    try {
+        //analyser = (analyser || context.createAnalyser());
+        //analyser.smoothingTimeConstant = 0.8;
+        //analyser.fftSize = 512;
+
+        sourceNode = context.createMediaElementSource(audio);
+        //sourceNode.connect(analyser);
+        sourceNode.connect(context.destination);
+
+        audio.play();
+        //drawSpectrum();
+    }
+    catch (ex){mensaje(ex.message,'setupAudioNodes');}
+}
+
+function drawSpectrum() {
+    var freq = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(freq);
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    audioAnimation = requestAnimationFrame(drawSpectrum);
+    for (var i = freq.length - 1; i >= 0; i--) {
+        var x = i * (bar.width + bar.gap);
+        var y = HEIGHT - (freq[i] * bar.ratio);
+        ctx.fillRect(x, y, bar.width, HEIGHT);
+    }
+}
 function loadSound(url) {
     try {
         alert(url);
