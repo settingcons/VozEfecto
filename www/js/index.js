@@ -44,8 +44,8 @@ function deviceReady() {
 
 
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-         context = new AudioContext(),
-            songs  = document.getElementById('aVER');
+         context = new AudioContext();
+             //songs  = document.getElementById('aVER');
         //    canvas = document.getElementById('songcanvas'),
         //    WIDTH  = canvas.width,
         //    HEIGHT = canvas.height,
@@ -60,7 +60,7 @@ function deviceReady() {
         //gradient.addColorStop(0.00,'#ffff00');
         //ctx.fillStyle = gradient;
         //
-        songs.addEventListener('click', loadSong, false);
+        //songs.addEventListener('click', loadSong, false);
 
     }
     catch (ex){alert('deviceReady: '+ex.message);}
@@ -142,9 +142,9 @@ function Reproducir3()
     songs.addEventListener('click', loadSong, false);
 }
 
-function loadSong(e) {
+function loadSong() {
     try {
-        e.preventDefault();
+        //e.preventDefault();
         //var url = e.target.href;
         //if (!url) return false;
         alert('1');
