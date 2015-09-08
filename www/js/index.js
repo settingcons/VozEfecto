@@ -62,7 +62,13 @@ function Reproducir() {
     try {
         limpiarMedia();
         alert('1');
-        if (audio) audio.remove();
+        if(esIOS()) {
+            if (audio) audio.remove();
+        }
+        else
+        {
+            if (audio) audio.close();
+        }
         alert('2');
         if (sourceNode) sourceNode.disconnect();
         //cancelAnimationFrame(audioAnimation);
