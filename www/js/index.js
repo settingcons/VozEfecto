@@ -87,6 +87,7 @@ function Reproducir(){
     alert('Reproducir');
     //alert(window.location.href);
     //var v_fichero = ObtenerFicheroAudio();
+    limpiarMedia();
     var v_fichero = _mediaAudioFicheroIOS;
 
     var v_dir=window.rootFS.toURL();
@@ -109,7 +110,7 @@ function Reproducir2(){
         //var v_buff=toArrayBuffer(_inciAudioFichero2);
     if(context!=null) {
         if (source != null) {
-            source.stop();
+            //source.stop();
             source.disconnect();
             delete source;
         }
@@ -137,7 +138,7 @@ function loadSound(url) {
     try {
         alert(url);
 
-        //limpiarMedia();
+        limpiarMedia();
 
 
 
