@@ -175,13 +175,16 @@ function setupAudioNodes() {
         //analyser = (analyser || context.createAnalyser());
         //analyser.smoothingTimeConstant = 0.8;
         //analyser.fftSize = 512;
-
+alert(7);
         sourceNode = context.createMediaElementSource(audio);
         //sourceNode.connect(analyser);
+        alert(8);
         sourceNode.connect(context.destination);
 
+        alert(9);
         audio.play();
         //drawSpectrum();
+        alert(10);
     }
     catch (ex){mensaje(ex.message,'setupAudioNodes');}
 }
