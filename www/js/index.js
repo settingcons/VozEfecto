@@ -115,7 +115,15 @@ function setupAudioNodes() {
             request.onload = function(){
                 context.decodeAudioData(request.response, function(buffer) {
                     source.buffer = buffer;
-                    alert('buffer');
+                    if(esIOS()){
+                        source.noteOn(0);
+                        alert('noteOn OK');
+                    }
+                    else{
+                        source.start(0);
+                    }
+
+
                 }, null);
             }
             request.send();
@@ -138,6 +146,7 @@ function setupAudioNodes() {
 
         //var biquadFilter = context.createBiquadFilter();
         //biquadFilter = (biquadFilter || context.createBiquadFilter());
+        /*
         biquadFilter = context.createBiquadFilter();
         if (document.getElementById('BiquadFilter_chk').checked){
             // Manipulate the Biquad filter
@@ -160,6 +169,7 @@ function setupAudioNodes() {
         else{
             source.start(0);
         }
+        */
 
         /* ------------------------------------------------------------------*/
 
