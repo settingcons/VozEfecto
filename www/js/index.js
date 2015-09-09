@@ -88,6 +88,9 @@ function Reproducir() {
 var miFichero=null;
 
 function Reproducir_MVL() {
+
+    alert('Reproducir_MVL');
+
     try {
         var v_fichero = '';
         //limpiarMedia();
@@ -104,13 +107,10 @@ function Reproducir_MVL() {
             v_fichero=ObtenerFicheroAudio();
         }
         //audio.src = v_fichero;
+        alert(v_fichero);
         miFichero = v_fichero;
 
-        try{
-
-            loadSoundTestFreq(miFichero); //audioFile
-        }
-        catch (ex){alert('ERROR. Exception: '+ex.message);}
+        loadSoundTestFreq(miFichero); //audioFile
 
     }
     catch (ex){mensaje(ex.message,'loadSong');}

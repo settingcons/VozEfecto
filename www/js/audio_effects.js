@@ -153,10 +153,11 @@ function loadSoundTest(url) {
 function loadSoundTestFreq(url) {
     //examples:
     // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createBiquadFilter
-
+    alert('Entra en loadSoundTestFreq');
     try
     {
         bufferSound(url);
+        alert(url);
         //alert(context.sampleRate); // 48000Hz
 
         /* ----------------------------------------------- */
@@ -250,7 +251,9 @@ function loadSoundTestFreq(url) {
 
 
         if(esIOS()){
+            alert('Antes noteOn');
             source.noteOn(0);
+            alert('Despues noteOn');
         }
         else{
             source.start(0);
