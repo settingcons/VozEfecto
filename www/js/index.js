@@ -28,6 +28,10 @@ var urlAudio;
 var audioAnimation;
 var sourceNode;
 var analyser;
+
+var compressor;
+var biquadFilter;
+
 var audio;
 var songs;
 function deviceReady() {
@@ -98,9 +102,9 @@ function setupAudioNodes() {
         /* ------------------------------------------------------------------*/
         // MVL - 09.09.2015 --> aplicar efectos
         //applyEffects();
-        var compressor = context.createDynamicsCompressor();
+        //var compressor = context.createDynamicsCompressor();
+        compressor = (compressor|| context.createDynamicsCompressor());
         if (document.getElementById('Compressor_chk').checked) {
-            alert('threshold: ' + rangeCMP_threshold_lbl.innerHTML);
             compressor.threshold.value = rangeCMP_threshold_lbl.innerHTML;
             compressor.knee.value = rangeCMP_knee_lbl.innerHTML;
             compressor.ratio.value = rangeCMP_ratio_lbl.innerHTML;
@@ -109,11 +113,13 @@ function setupAudioNodes() {
             compressor.release.value = rangeCMP_release_lbl.innerHTML;
         }
 
-        var biquadFilter = context.createBiquadFilter();
+        //var biquadFilter = context.createBiquadFilter();
+        biquadFilter = (biquadFilter || context.createBiquadFilter());
         if (document.getElementById('BiquadFilter_chk').checked){
             // Manipulate the Biquad filter
             // Type : lowshelf, highshelf, peaking
             biquadFilter.type = document.getElementById('rangeBQ_type').value;  //"peaking";
+            alert('BQ Type : ' + biquadFilter.type);
             biquadFilter.frequency.value = rangeBQ_freq_lbl.innerHTML;          //350;    //aprox. frequency human 350
             biquadFilter.gain.value = rangeBQ_gain_lbl.innerHTML;               //25
             biquadFilter.Q.value = rangeBQ_Qf_lbl.innerHTML;                    // nominal range of 0.0001 to 1000.
@@ -122,7 +128,7 @@ function setupAudioNodes() {
 
         //sourceNode.connect(compressor);
         sourceNode.connect(biquadFilter);
-        sourceNode.connect(context.destination);
+        biquadFilter.connect(context.destination);
         /* ------------------------------------------------------------------*/
 
         audio.play();
