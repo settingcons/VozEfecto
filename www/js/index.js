@@ -120,9 +120,9 @@ function setupAudioNodes() {
             biquadFilter.detune.value = rangeBQ_detune_lbl.innerHTML;           //1540;
         }
 
-        sourceNode.connect(compressor);
-        compressor.connect(biquadFilter);
-        biquadFilter.connect(context.destination);
+        //sourceNode.connect(compressor);
+        sourceNode.connect(biquadFilter);
+        sourceNode.connect(context.destination);
         /* ------------------------------------------------------------------*/
 
         audio.play();
