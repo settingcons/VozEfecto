@@ -95,8 +95,23 @@ function setupAudioNodes() {
         //sourceNode.connect(context.destination);
 
 
+        /* ------------------------------------------------------------------*/
         // MVL - 09.09.2015 --> aplicar efectos
-        applyEffects();
+        //applyEffects();
+        var compressor = context.createDynamicsCompressor();
+        if (document.getElementById('Compressor_chk').checked) {
+            alert('threshold: ' + rangeCMP_threshold_lbl.innerHTML);
+            compressor.threshold.value = rangeCMP_threshold_lbl.innerHTML;
+            compressor.knee.value = rangeCMP_knee_lbl.innerHTML;
+            compressor.ratio.value = rangeCMP_ratio_lbl.innerHTML;
+            compressor.reduction.value = rangeCMP_reduction_lbl.innerHTML;
+            compressor.attack.value = rangeCMP_attack_lbl.innerHTML;
+            compressor.release.value = rangeCMP_release_lbl.innerHTML;
+        }
+
+        sourceNode.connect(compressor);
+        compressor.connect(context.destination);
+        /* ------------------------------------------------------------------*/
 
 
         audio.play();
