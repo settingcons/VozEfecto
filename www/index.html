@@ -48,10 +48,138 @@
                         </td>
                     </tr></table></td></tr>
                 </table>
-    </div>
+        </div>
+
+        <!-- MVL 09.09.2015 -->
+        <div id="audios"  style="font-size: 20px">
+            <hr style="color: #0056b2;"/>
+            <div id="divSpeed"  style="font-size: 20px; height: 40px; background-color: lightblue">
+                <span id="span_FX" style="width: 100px;font-size: 34px; font-weight: bold">&nbsp;>>&nbsp;APLICAR EFECTOS&nbsp;<<&nbsp;</span>
+            </div>
+            <!-- ---------------------------------- -->
+            <!--            Speed                   -->
+            <!-- ---------------------------------- -->
+            <div id="divSpeed"  style="font-size: 20px; height: 80px; background-color: darkseagreen;">
+                <input type="checkbox" name="Speed_chk" id="Speed_chk" value="false">
+                <label for="Speed" style="font-size: 24px; font-weight: bold">Speed</label>
+                <br/>
+                <input id="rangeSP_Speed" type="range" min="0.50" max="2" value="1" step="0.01" oninput="rangeSP_S();">
+                <span id="rangeSP_Speed_lbl" style="width: 100px">1</span>
+                &nbsp;&nbsp;
+            </div>
+
+            <!-- -------------------------------------------- -->
+            <!--            Compressor                        -->
+            <!-- -------------------------------------------- -->
+            <div id="divCompressor"  style="font-size: 20px; height: 100px; background-color: cornflowerblue">
+                <input type="checkbox" name="Compressor_chk" id="Compressor_chk" value="false">
+                <label for="Compressor" style="font-size: 24px; font-weight: bold">Compressor</label>
+                <br/>
+                Threshold
+                <input id="rangeCMP_threshold" type="range" min="-100" max="0" value="-24" step="1" oninput="rangeCMP_T();">
+                <span id="rangeCMP_threshold_lbl" style="width: 100px">-24</span>
+                &nbsp;&nbsp;
+                Knee
+                <input id="rangeCMP_knee" type="range" min="0" max="40" value="30" step="1" oninput="rangeCMP_K();">
+                <span id="rangeCMP_knee_lbl" style="width: 100px">30</span>
+                &nbsp;&nbsp;
+                Ratio
+                <input id="rangeCMP_ratio" type="range" min="1" max="800" value="12" step="1" oninput="rangeCMP_R();">
+                <span id="rangeCMP_ratio_lbl" style="width: 100px">12</span>
+                &nbsp;&nbsp;
+                Reduction
+                <input id="rangeCMP_reduction" type="range" min="-20" max="0" value="0" step="1" oninput="rangeCMP_D();">
+                <span id="rangeCMP_reduction_lbl" style="width: 100px">0</span>
+                &nbsp;&nbsp;
+                <br/>
+                Attack
+                <input id="rangeCMP_attack" type="range" min="0" max="1" value="0.003" step="0.001" oninput="rangeCMP_A();">
+                <span id="rangeCMP_attack_lbl" style="width: 100px">0.003</span>
+                &nbsp;&nbsp;
+                Release
+                <input id="rangeCMP_release" type="range" min="0" max="1" value="0" step="0.01" oninput="rangeCMP_L();">
+                <span id="rangeCMP_release_lbl" style="width: 100px">0</span>
+                &nbsp;&nbsp;
+            </div>
+
+
+            <!-- -------------------------------------------- -->
+            <!--            Distortion (WaveShaper)           -->
+            <!-- -------------------------------------------- -->
+            <div id="divDistortion"  style="font-size: 20px; height: 100px; background-color: coral">
+                <input type="checkbox" name="Distortion_chk" id="Distortion_chk" value="false">
+                <label for="Distortion" style="font-size: 24px; font-weight: bold">Distortion</label>
+                <br/>Curve
+                <input id="rangeDist_curve" type="range" min="-800" max="800" value="0" step="1" oninput="rangeDist_C();">
+                <span id="rangeDist_curve_lbl" style="width: 100px">0</span>
+                &nbsp;&nbsp;
+                <br/>Oversample
+                <select id="rangeDist_over" name="rangeBQ_type" >
+                    <option value="none" selected>-- None --
+                    <option value="2x">2x
+                    <option value="4x">4x
+                </select>
+            </div>
+
+            <!-- ---------------------------------- -->
+            <!--            BiquadFilter            -->
+            <!-- ---------------------------------- -->
+            <div id="divBiquadFilter"  style="font-size: 20px; height: 100px; background-color: khaki;">
+                <input type="checkbox" name="BiquadFilter_chk" id="BiquadFilter_chk" value="false">
+                <label for="BiquadFilter" style="font-size: 24px; font-weight: bold">BiquadFilter</label>
+                <br/>Type
+                <select id="rangeBQ_type" name="rangeBQ_type" >
+                    <option value="0" selected>-- None --
+                    <option value="lowshelf" >lowshelf
+                    <option value="highshelf">highshelf
+                    <option value="peaking">peaking
+                </select>
+                &nbsp;&nbsp;
+                <br/>Gain
+                <input id="rangeBQ_gain" type="range" min="0" max="100" value="10" step="1" oninput="rangeBQ_G();">
+                <span id="rangeBQ_gain_lbl" style="width: 100px">10</span>
+                &nbsp;&nbsp;
+                Frequency
+                <input id="rangeBQ_freq" type="range" min="20" max="20000" value="9990" step="100" oninput="rangeBQ_F();">
+                <span id="rangeBQ_freq_lbl" style="width: 100px">9990</span>
+                &nbsp;&nbsp;
+                Detune
+                <input id="rangeBQ_detune" type="range" min="1" max="2000" value="0" step="1" oninput="rangeBQ_D();">
+                <span id="rangeBQ_detune_lbl" style="width: 100px">0</span>
+                Q-Filter
+                <input id="rangeBQ_Qf" type="range" min="1" max="1000" value="0" step="1" oninput="rangeBQ_Q();">
+                <span id="rangeBQ_Qf_lbl" style="width: 100px">0</span>
+                &nbsp;&nbsp;
+            </div>
+
+
+            <!-- ---------------------------------- -->
+            <!--            Reverb (Convolver)      -->
+            <!-- ---------------------------------- -->
+            <div id="divReverb"  style="font-size: 20px; height: 50px; background-color: mediumslateblue;">
+                <input type="checkbox" name="Reverb_chk" id="Reverb_chk" value="false">
+                <label for="Reverb" style="font-size: 24px; font-weight: bold">Reverb (No function)</label>
+            </div>
+            <br/>
+
+            <!-- ---------------------------------- -->
+            <!--            B U T T O N S           -->
+            <!-- ---------------------------------- -->
+            <!--
+            <button id='play'  style="font-size: 30px" onclick="play()">PLAY NORMAL</button>
+            <button id='playFreq'  style="font-size: 30px" onclick="playFreq()">PLAY EFFECT</button>
+            <button id='stop'  style="font-size: 30px" onclick="stop()">STOP</button>
+            <button id='reverbBtn'  style="font-size: 30px; width: 350px;" onclick="reverb()">REVERB example</button>
+            -->
+
+        </div>
+
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <!-- MVL 09.09.2015 -->
+        <script type="text/javascript" src="js/audio_effects.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>

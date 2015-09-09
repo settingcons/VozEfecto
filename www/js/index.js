@@ -92,7 +92,12 @@ function setupAudioNodes() {
 
         sourceNode = context.createMediaElementSource(audio);
         //sourceNode.connect(analyser);
-        sourceNode.connect(context.destination);
+        //sourceNode.connect(context.destination);
+
+
+        // MVL - 09.09.2015 --> aplicar efectos
+        applyEffects(sourceNode);
+
 
         audio.play();
         //drawSpectrum();
