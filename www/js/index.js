@@ -88,94 +88,54 @@ function Reproducir() {
     catch (ex){mensaje(ex.message,'loadSong');}
 }
 
+var miFichero=null;
+
+function Reproducir_MVL() {
+    try {
+        var v_fichero = '';
+        limpiarMedia();
+
+        //if (audio) audio.remove();
+        //if (sourceNode) sourceNode.disconnect();
+        //cancelAnimationFrame(audioAnimation);
+        //audio = new Audio();
+
+        if(esIOS()) {
+            v_fichero = _mediaAudioFicheroIOS;
+
+            var v_dir = window.rootFS.toURL();
+            v_dir = v_dir.substring("file://".length);
+            v_fichero = v_dir + v_fichero;
+        }
+        else
+        {
+            v_fichero=ObtenerFicheroAudio();
+        }
+        //audio.src = v_fichero;
+        miFichero = v_fichero;
+        setupAudioNodes_MVL();
+    }
+    catch (ex){mensaje(ex.message,'loadSong');}
+}
+
+function setupAudioNodes_MVL() {
+    try {
+        loadSound_MVL(miFichero);
+    }
+    catch (ex){mensaje(ex.message,'setupAudioNodes');}
+}
+
 function setupAudioNodes() {
     try {
         //analyser = (analyser || context.createAnalyser());
         //analyser.smoothingTimeConstant = 0.8;
         //analyser.fftSize = 512;
 
-        //ESTHER sourceNode = context.createMediaElementSource(audio);
-
+        sourceNode = context.createMediaElementSource(audio);
         //sourceNode.connect(analyser);
         //sourceNode.connect(context.destination);
 
-
-        /* ------------------------------------------------------------------*/
-        // MVL - 09.09.2015 --> aplicar efectos
-        //applyEffects();
-
-        // B U F F E R
-        try
-        {
-            alert(audio.src);
-            source = context.createBufferSource(); //this represents the audio source. We need to now populate it with binary data.
-            var request = new XMLHttpRequest();
-            request.open('GET', audio.src, true);
-            request.responseType = 'arraybuffer'; //This asks the browser to populate the retrieved binary data in a array buffer
-            request.onload = function(){
-                context.decodeAudioData(request.response, function(buffer) {
-                    source.buffer = buffer;
-                    if(esIOS()){
-                        source.noteOn(0);
-                        alert('noteOn OK');
-                    }
-                    else{
-                        source.start(0);
-                    }
-
-
-                }, null);
-            }
-            request.send();
-        }
-        catch (ex9){alert('Web Audio API not supported. Exception: '+ex9.message);}
-
-        //var compressor = context.createDynamicsCompressor();
-        /*
-        compressor = (compressor|| context.createDynamicsCompressor());
-        if (document.getElementById('Compressor_chk').checked) {
-            compressor.threshold.value = rangeCMP_threshold_lbl.innerHTML;
-            compressor.knee.value = rangeCMP_knee_lbl.innerHTML;
-            compressor.ratio.value = rangeCMP_ratio_lbl.innerHTML;
-            compressor.reduction.value = rangeCMP_reduction_lbl.innerHTML;
-            compressor.attack.value = rangeCMP_attack_lbl.innerHTML;
-            compressor.release.value = rangeCMP_release_lbl.innerHTML;
-        }
-        */
-
-
-        //var biquadFilter = context.createBiquadFilter();
-        //biquadFilter = (biquadFilter || context.createBiquadFilter());
-        /*
-        biquadFilter = context.createBiquadFilter();
-        if (document.getElementById('BiquadFilter_chk').checked){
-            // Manipulate the Biquad filter
-            // Type : lowshelf, highshelf, peaking
-            biquadFilter.type = document.getElementById('rangeBQ_type').value;  //"peaking";
-            alert('BQ Type : ' + biquadFilter.type);
-            biquadFilter.frequency.value = rangeBQ_freq_lbl.innerHTML;          //350;    //aprox. frequency human 350
-            biquadFilter.gain.value = rangeBQ_gain_lbl.innerHTML;               //25
-            biquadFilter.Q.value = rangeBQ_Qf_lbl.innerHTML;                    // nominal range of 0.0001 to 1000.
-            biquadFilter.detune.value = rangeBQ_detune_lbl.innerHTML;           //1540;
-        }
-
-        source.connect(biquadFilter);
-        biquadFilter.connect(context.destination);
-
-        if(esIOS()){
-            source.noteOn(0);
-            alert('noteOn OK');
-        }
-        else{
-            source.start(0);
-        }
-        */
-
-        /* ------------------------------------------------------------------*/
-
-
-        /* LO DE Esther */
-        //audio.play();
+        audio.play();
         //drawSpectrum();
     }
     catch (ex){mensaje(ex.message,'setupAudioNodes');}
@@ -224,6 +184,38 @@ function loadSound(url) {
     catch (ex){alert('loadSound: '+ex.message);}
 }
 
+function loadSound_MVL(url) {
+    try {
+        alert(url);
+
+        limpiarMedia();
+
+
+
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+
+        alert('loadSound1');
+        request.onload = function() {
+            alert('loadSound2');
+            alert(request.response);
+            try
+            {
+                context.decodeAudioData(request.response, function(buffer) {
+                    alert('ok');
+                    //sound = buffer;
+                    playSound_MVL(buffer);
+                },ErrorLoad);
+            }
+            catch (ex){mensaje(ex.message,"ERROR on load")}
+        }
+
+        request.send();
+    }
+    catch (ex){alert('loadSound: '+ex.message);}
+}
+
 function limpiarMedia()
 {
     try {
@@ -251,6 +243,60 @@ function playSound(buffer) {
         alert('playSound');
         source = context.createBufferSource();
         source.buffer = buffer;
+        source.connect(context.destination);
+        source.start(0);
+        alert('playSound fin');
+    }
+    catch (ex){mensaje(ex.message,'ERROR playSound');}
+}
+
+
+function playSound_MVL(buffer) {
+    try {
+        alert('playSound');
+        source = context.createBufferSource();
+        source.buffer = buffer;
+
+        /* ------------------------------------------------------------------*/
+        // MVL - 09.09.2015 --> aplicar efectos
+        //applyEffects();
+
+        if (document.getElementById('Speed_chk').checked){
+            source.playbackRate.value = rangeSP_Speed_lbl.innerHTML;
+        }
+
+        //var compressor = context.createDynamicsCompressor();
+        /*
+         compressor = (compressor|| context.createDynamicsCompressor());
+         if (document.getElementById('Compressor_chk').checked) {
+         compressor.threshold.value = rangeCMP_threshold_lbl.innerHTML;
+         compressor.knee.value = rangeCMP_knee_lbl.innerHTML;
+         compressor.ratio.value = rangeCMP_ratio_lbl.innerHTML;
+         compressor.reduction.value = rangeCMP_reduction_lbl.innerHTML;
+         compressor.attack.value = rangeCMP_attack_lbl.innerHTML;
+         compressor.release.value = rangeCMP_release_lbl.innerHTML;
+         }
+         */
+
+
+        //var biquadFilter = context.createBiquadFilter();
+        //biquadFilter = (biquadFilter || context.createBiquadFilter());
+
+         biquadFilter = context.createBiquadFilter();
+         if (document.getElementById('BiquadFilter_chk').checked){
+             // Manipulate the Biquad filter
+             // Type : lowshelf, highshelf, peaking
+             biquadFilter.type = document.getElementById('rangeBQ_type').value;  //"peaking";
+             alert('BQ Type : ' + biquadFilter.type);
+             biquadFilter.frequency.value = rangeBQ_freq_lbl.innerHTML;          //350;    //aprox. frequency human 350
+             biquadFilter.gain.value = rangeBQ_gain_lbl.innerHTML;               //25
+             biquadFilter.Q.value = rangeBQ_Qf_lbl.innerHTML;                    // nominal range of 0.0001 to 1000.
+             biquadFilter.detune.value = rangeBQ_detune_lbl.innerHTML;           //1540;
+         }
+
+         source.connect(biquadFilter);
+         biquadFilter.connect(context.destination);
+
         source.connect(context.destination);
         source.start(0);
         alert('playSound fin');
