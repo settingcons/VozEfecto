@@ -109,12 +109,30 @@ function setupAudioNodes() {
             compressor.release.value = rangeCMP_release_lbl.innerHTML;
         }
 
+        var biquadFilter = context.createBiquadFilter();
+        if (document.getElementById('BiquadFilter_chk').checked){
+            // Manipulate the Biquad filter
+            // Type : lowshelf, highshelf, peaking
+            biquadFilter.type = document.getElementById('rangeBQ_type').value;  //"peaking";
+            biquadFilter.frequency.value = rangeBQ_freq_lbl.innerHTML;          //350;    //aprox. frequency human 350
+            biquadFilter.gain.value = rangeBQ_gain_lbl.innerHTML;               //25
+            biquadFilter.Q.value = rangeBQ_Qf_lbl.innerHTML;                    // nominal range of 0.0001 to 1000.
+            biquadFilter.detune.value = rangeBQ_detune_lbl.innerHTML;           //1540;
+        }
+
         sourceNode.connect(compressor);
-        compressor.connect(context.destination);
+        compressor.connect(biquadFilter);
+        biquadFilter.connect(context.destination);
         /* ------------------------------------------------------------------*/
 
+        if(esIOS()){
+            sourceNode.noteOn(0);
+        }
+        else{
+            sourceNode.start(0);
+        }
 
-        audio.play();
+        //audio.play();
         //drawSpectrum();
     }
     catch (ex){mensaje(ex.message,'setupAudioNodes');}
