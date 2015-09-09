@@ -125,14 +125,7 @@ function setupAudioNodes() {
         biquadFilter.connect(context.destination);
         /* ------------------------------------------------------------------*/
 
-        if(esIOS()){
-            sourceNode.noteOn(0);
-        }
-        else{
-            sourceNode.start(0);
-        }
-
-        //audio.play();
+        audio.play();
         //drawSpectrum();
     }
     catch (ex){mensaje(ex.message,'setupAudioNodes');}
