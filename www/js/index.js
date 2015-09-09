@@ -130,8 +130,8 @@ function setupAudioNodes() {
         }
 
         //sourceNode.connect(compressor);
-        sourceNode.connect(biquadFilter);
-        biquadFilter.connect(context.destination);
+        biquadFilter.connect(sourceNode);
+        sourceNode.connect(context.destination);
         /* ------------------------------------------------------------------*/
 
         audio.play();
