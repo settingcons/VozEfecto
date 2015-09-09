@@ -109,7 +109,7 @@ function Reproducir_MVL() {
         //audio.src = v_fichero;
         alert(v_fichero);
         miFichero = v_fichero;
-        loadSound(miFichero);
+        loadSound_MVL(miFichero);
 
         //loadSoundTestFreq(miFichero); //audioFile
 
@@ -176,6 +176,38 @@ function loadSound(url) {
     catch (ex){alert('loadSound: '+ex.message);}
 }
 
+function loadSound_MVL(url) {
+    try {
+        alert(url);
+
+        limpiarMedia();
+
+
+
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+
+        alert('loadSound1');
+        request.onload = function() {
+            alert('loadSound2');
+            alert(request.response);
+            try
+            {
+                context.decodeAudioData(request.response, function(buffer) {
+                    alert('ok');
+                    //sound = buffer;
+                    playSound_MVL(buffer);
+                },ErrorLoad);
+            }
+            catch (ex){mensaje(ex.message,"ERROR on load")}
+        }
+
+        request.send();
+    }
+    catch (ex){alert('loadSound: '+ex.message);}
+}
+
 function limpiarMedia()
 {
     try {
@@ -206,6 +238,18 @@ function playSound(buffer) {
         source.connect(context.destination);
         source.start(0);
         alert('playSound fin');
+    }
+    catch (ex){mensaje(ex.message,'ERROR playSound');}
+}
+
+function playSound_MVL(buffer) {
+    try {
+        alert('playSound_MVL');
+        source = context.createBufferSource();
+        source.buffer = buffer;
+        source.connect(context.destination);
+        source.start(0);
+        alert('playSound_MVL fin');
     }
     catch (ex){mensaje(ex.message,'ERROR playSound');}
 }
