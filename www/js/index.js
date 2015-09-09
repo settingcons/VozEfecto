@@ -103,6 +103,7 @@ function setupAudioNodes() {
         // MVL - 09.09.2015 --> aplicar efectos
         //applyEffects();
         //var compressor = context.createDynamicsCompressor();
+        /*
         compressor = (compressor|| context.createDynamicsCompressor());
         if (document.getElementById('Compressor_chk').checked) {
             compressor.threshold.value = rangeCMP_threshold_lbl.innerHTML;
@@ -112,6 +113,8 @@ function setupAudioNodes() {
             compressor.attack.value = rangeCMP_attack_lbl.innerHTML;
             compressor.release.value = rangeCMP_release_lbl.innerHTML;
         }
+        */
+
 
         //var biquadFilter = context.createBiquadFilter();
         biquadFilter = (biquadFilter || context.createBiquadFilter());
@@ -128,7 +131,7 @@ function setupAudioNodes() {
 
         //sourceNode.connect(compressor);
         sourceNode.connect(biquadFilter);
-        biquadFilter.connect(context.destination);
+        sourceNode.connect(context.destination);
         /* ------------------------------------------------------------------*/
 
         audio.play();
