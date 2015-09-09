@@ -29,9 +29,6 @@ var audioAnimation;
 var sourceNode;
 var analyser;
 
-var compressor;
-var biquadFilter;
-
 var audio;
 var songs;
 function deviceReady() {
@@ -267,7 +264,7 @@ function playSound_MVL(buffer) {
 
         //var compressor = context.createDynamicsCompressor();
         /*
-         compressor = (compressor|| context.createDynamicsCompressor());
+         var compressor = (compressor|| context.createDynamicsCompressor());
          if (document.getElementById('Compressor_chk').checked) {
          compressor.threshold.value = rangeCMP_threshold_lbl.innerHTML;
          compressor.knee.value = rangeCMP_knee_lbl.innerHTML;
@@ -281,8 +278,8 @@ function playSound_MVL(buffer) {
 
         //var biquadFilter = context.createBiquadFilter();
         //biquadFilter = (biquadFilter || context.createBiquadFilter());
-
-         biquadFilter = context.createBiquadFilter();
+/*
+         var biquadFilter = context.createBiquadFilter();
          if (document.getElementById('BiquadFilter_chk').checked){
              // Manipulate the Biquad filter
              // Type : lowshelf, highshelf, peaking
@@ -296,9 +293,17 @@ function playSound_MVL(buffer) {
 
          source.connect(biquadFilter);
          biquadFilter.connect(context.destination);
+*/
 
-        source.connect(context.destination);
-        source.start(0);
+        //source.connect(context.destination);
+        if(esIOS()){
+            source.noteOn(0);
+            alert('noteOn');
+        }
+        else{
+            source.start(0);
+        }
+
         alert('playSound fin');
     }
     catch (ex){mensaje(ex.message,'ERROR playSound');}
