@@ -238,7 +238,21 @@ function playSound_MVL(buffer) {
             source.playbackRate.value = rangeSP_Speed_lbl.innerHTML;
         }
 
-        source.connect(context.destination);
+        var biquadFilter = context.createBiquadFilter();
+        if (document.getElementById('BiquadFilter_chk').checked){
+            // Manipulate the Biquad filter
+            // Type : lowshelf, highshelf, peaking
+            biquadFilter.type = document.getElementById('rangeBQ_type').value;  //"peaking";
+            biquadFilter.frequency.value = rangeBQ_freq_lbl.innerHTML;          //350;    //aprox. frequency human 350
+            biquadFilter.gain.value = rangeBQ_gain_lbl.innerHTML;               //25
+            biquadFilter.Q.value = rangeBQ_Qf_lbl.innerHTML;;                   // nominal range of 0.0001 to 1000.
+            biquadFilter.detune.value = rangeBQ_detune_lbl.innerHTML;           //1540;
+        }
+
+        source.connect(biquadFilter);
+        biquadFilter.connect(context.destination);
+
+        //source.connect(context.destination);
         source.start(0);
         alert('playSound_MVL fin');
     }
