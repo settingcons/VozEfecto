@@ -252,8 +252,7 @@ function loadSoundTestFreq(url) {
 
         if(esIOS()){
             alert('Antes noteOn');
-            //source.noteOn(0);
-            source.start(0);
+            source.noteOn(0);
             alert('Despues noteOn');
         }
         else{

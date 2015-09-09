@@ -106,13 +106,8 @@ function Reproducir_MVL() {
         {
             v_fichero=ObtenerFicheroAudio();
         }
-        //audio.src = v_fichero;
-        alert(v_fichero);
         miFichero = v_fichero;
         loadSound_MVL(miFichero);
-
-        //loadSoundTestFreq(miFichero); //audioFile
-
     }
     catch (ex){mensaje(ex.message,'loadSong');}
 }
@@ -178,25 +173,16 @@ function loadSound(url) {
 
 function loadSound_MVL(url) {
     try {
-        alert(url);
-
         limpiarMedia();
-
-
 
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
 
-        alert('loadSound1');
         request.onload = function() {
-            alert('loadSound2');
-            alert(request.response);
             try
             {
                 context.decodeAudioData(request.response, function(buffer) {
-                    alert('ok');
-                    //sound = buffer;
                     playSound_MVL(buffer);
                 },ErrorLoad);
             }
@@ -247,6 +233,11 @@ function playSound_MVL(buffer) {
         alert('playSound_MVL');
         source = context.createBufferSource();
         source.buffer = buffer;
+
+        if (document.getElementById('Speed_chk').checked){
+            source.playbackRate.value = rangeSP_Speed_lbl.innerHTML;
+        }
+
         source.connect(context.destination);
         source.start(0);
         alert('playSound_MVL fin');
