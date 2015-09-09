@@ -109,8 +109,9 @@ function Reproducir_MVL() {
         //audio.src = v_fichero;
         alert(v_fichero);
         miFichero = v_fichero;
+        loadSound(miFichero);
 
-        loadSoundTestFreq(miFichero); //audioFile
+        //loadSoundTestFreq(miFichero); //audioFile
 
     }
     catch (ex){mensaje(ex.message,'loadSong');}
