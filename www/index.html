@@ -162,10 +162,24 @@
             <!-- ---------------------------------- -->
             <!--            Reverb (Convolver)      -->
             <!-- ---------------------------------- -->
-            <div style="font-size: 20px; height: 50px; background-color: #ff90b6">
+            <div id="divReverb"  style="font-size: 20px; height: 80px; background-color: mediumslateblue;">
                 <input type="checkbox" name="Reverb_chk" id="Reverb_chk" value="false">
-                <label for="Reverb" style="font-size: 24px; font-weight: bold">Reverb (No function)</label>
+                <label for="Reverb" style="font-size: 24px; font-weight: bold">Reverb</label>
+                <br/>Second
+                <input id="rangeRV_second" type="range" min="0.1" max="1" value="0.1" step="0.1" oninput="rangeRV_S();">
+                <span id="rangeRV_second_lbl" style="width: 100px">0.1</span>
+                &nbsp;&nbsp;
+                Decay
+                <input id="rangeRV_decay" type="range" min="0" max="10" value="0" step="0.1" oninput="rangeRV_D();">
+                <span id="rangeRV_decay_lbl" style="width: 100px">0</span>
+                &nbsp;&nbsp;
+                Reverse
+                <select id="rangeRV_rev" name="rangeBQ_type" >
+                    <option value="false" selected>False
+                    <option value="true" >True
+                </select>
             </div>
+
             <br/>
 
             <!-- ---------------------------------- -->

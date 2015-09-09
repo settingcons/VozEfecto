@@ -89,8 +89,6 @@ var miFichero=null;
 
 function Reproducir_MVL() {
 
-    alert('Reproducir_MVL');
-
     try {
         var v_fichero = '';
         //limpiarMedia();
@@ -230,7 +228,6 @@ function playSound(buffer) {
 
 function playSound_MVL(buffer) {
     try {
-        alert('playSound_MVL');
         source = context.createBufferSource();
         source.buffer = buffer;
 
@@ -238,6 +235,47 @@ function playSound_MVL(buffer) {
             source.playbackRate.value = rangeSP_Speed_lbl.innerHTML;
         }
 
+        var analyser = context.createAnalyser();
+        //analyser.minDecibels = -90;
+        //analyser.maxDecibels = -10;
+        //analyser.smoothingTimeConstant = 0.85;
+
+        /* ----------------------------------------------- */
+        //      Compressor
+        /* ----------------------------------------------- */
+        // Create a compressor node
+        var compressor = context.createDynamicsCompressor();
+        if (document.getElementById('Compressor_chk').checked) {
+            compressor.threshold.value = rangeCMP_threshold_lbl.innerHTML;
+            compressor.knee.value = rangeCMP_knee_lbl.innerHTML;
+            compressor.ratio.value = rangeCMP_ratio_lbl.innerHTML;
+            compressor.reduction.value = rangeCMP_reduction_lbl.innerHTML;
+            compressor.attack.value = rangeCMP_attack_lbl.innerHTML;
+            compressor.release.value = rangeCMP_release_lbl.innerHTML;
+        }
+
+
+
+        /* ----------------------------------------------- */
+        //      Distortion
+        /* ----------------------------------------------- */
+        var distortion = context.createWaveShaper();
+        if (document.getElementById('Distortion_chk').checked){
+            var iCurve = makeDistortionCurve(rangeDist_curve_lbl.innerHTML);  //400
+            distortion.curve = iCurve; //makeDistortionCurve(rangeDist_curve_lbl.innerHTML);  //400
+            distortion.oversample = document.getElementById('rangeDist_over').value;    // '4x'
+        }
+
+
+        /* ----------------------------------------------- */
+        //      Gain (Volumen)
+        /* ----------------------------------------------- */
+        //var gainNode = context.createGain();
+
+
+        /* ----------------------------------------------- */
+        //      biquadFilter (Onda de filtro)
+        /* ----------------------------------------------- */
         var biquadFilter = context.createBiquadFilter();
         if (document.getElementById('BiquadFilter_chk').checked){
             // Manipulate the Biquad filter
@@ -249,12 +287,39 @@ function playSound_MVL(buffer) {
             biquadFilter.detune.value = rangeBQ_detune_lbl.innerHTML;           //1540;
         }
 
-        source.connect(biquadFilter);
-        biquadFilter.connect(context.destination);
+        /* ----------------------------------------------- */
+        //      Reverberación
+        /* ----------------------------------------------- */
+        var convolver = context.createConvolver();
+        if (document.getElementById('Reverb_chk').checked){
+            convolver.buffer = null;
+            var duration = rangeRV_second_lbl.innerHTML;
+            var decay = rangeRV_decay_lbl.innerHTML;
+            var reverse = document.getElementById('rangeRV_rev').value;  //true/false
 
-        //source.connect(context.destination);
+            var impulseBuffer = impulseResponse(duration, decay ,reverse);
+            convolver.buffer = impulseBuffer; //concertHallBuffer;
+        }
+
+
+
+        /* ----------------------------------------------- */
+        //      CONEXION de los NODOS
+        /* ----------------------------------------------- */
+        source.connect(analyser);
+        analyser.connect(compressor);
+        compressor.connect(distortion);
+        distortion.connect(biquadFilter);
+        if (document.getElementById('Reverb_chk').checked){
+            biquadFilter.connect(convolver);
+            convolver.connect(context.destination);
+        }
+        else{
+            biquadFilter.connect(context.destination);
+        }
+
+        // - - - - - - - - P L A Y - - - - - - - -
         source.start(0);
-        alert('playSound_MVL fin');
     }
     catch (ex){mensaje(ex.message,'ERROR playSound');}
 }

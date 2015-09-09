@@ -556,62 +556,53 @@ function makeDistortionCurve(amount) {
 /* ------------------------------------------------------------------ */
 //                          R E V E R B
 /* ------------------------------------------------------------------ */
-function reverb() {
-    try {
-        var url = audioFile;
-        source = context.createBufferSource();
-        var request = new XMLHttpRequest();
-        request.open('GET', url, true);
-        request.responseType = 'arraybuffer'; //This asks the browser to populate the retrieved binary data in a array buffer
-        request.onload = function () {
-            context.decodeAudioData(request.response, function (buffer) {
-                source.buffer = buffer;
-            }, null);
-        }
-        request.send();
-        source.connect(context.destination);//destination property is reference the default audio device
-
-        if (esIOS()) {
-            source.noteOn(0);
-        }
-        else {
-            source.start(0);
-        }
-    }
-    catch (ex9){alert('Error Reverb. Exception: '+ex9.message);}
-} //this represents the audio source. We need to now populate it with binary data.
-
-function reverb_1(){
-
-    //var audioCtx = new window.AudioContext || window.webkitAudioContext;
-    var convolver = context.createConvolver();
-    var soundSource, concertHallBuffer;
+var rangeReverb=0;
+function rangeRV_S(){
     try{
-        source = context.createBufferSource();
-        var ajaxRequest = new XMLHttpRequest();
-        ajaxRequest.open('GET', audioFile, true);
-        ajaxRequest.responseType = 'arraybuffer';
-
-        ajaxRequest.onload = function() {
-            context.decodeAudioData(ajaxRequest.response, function(buffer) {
-                concertHallBuffer = buffer;
-                soundSource = context.createBufferSource();
-                soundSource.buffer = concertHallBuffer;
-
-            }, function(e){"Error with decoding audio data" + e.err});
-        }
-        ajaxRequest.send();
-        //convolver.buffer = concertHallBuffer;
-
-        source.connect(convolver);
-        convolver.connect(context.destination);
-
-        source.start(0);
-
+        rangeReverb= rangeRV_second.value;
+        rangeRV_second_lbl.innerHTML = rangeReverb;
     }
-    catch (ex9){alert('Error Reverb. Exception: '+ex9.message);}
-
+    catch (ex9){alert('Error rangeRV_S. Exception: '+ex9.message);}
 }
+
+function rangeRV_D(){
+    try{
+        rangeReverb= rangeRV_decay.value;
+        rangeRV_decay_lbl.innerHTML = rangeReverb;
+    }
+    catch (ex9){alert('Error rangeRV_D. Exception: '+ex9.message);}
+}
+
+function rangeRV_R(){
+    try{
+        rangeReverb= rangeRV_rev.value;
+        rangeRV_rev_lbl.innerHTML = rangeReverb;
+    }
+    catch (ex9){alert('Error rangeRV_S. Exception: '+ex9.message);}
+}
+
+function impulseResponse( duration, decay, reverse ) {
+
+    var sampleRate = context.sampleRate;
+    var length = sampleRate * duration;
+    var impulse = context.createBuffer(2, length, sampleRate);
+    var impulseL = impulse.getChannelData(0);
+    var impulseR = impulse.getChannelData(1);
+
+    try{
+        if (!decay)
+            decay = 2.0;
+        for (var i = 0; i < length; i++){
+            var n = reverse ? length - i : i;
+            impulseL[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
+            impulseR[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
+        }
+    }
+    catch (ex9){alert('Error rangeRV_S. Exception: '+ex9.message);}
+
+    return impulse;
+}
+
 
 
 /* ------------------------------------------------------------------ */
