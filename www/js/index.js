@@ -96,7 +96,7 @@ function setupAudioNodes() {
 
 
         // MVL - 09.09.2015 --> aplicar efectos
-        applyEffects(sourceNode);
+        applyEffects();
 
 
         audio.play();

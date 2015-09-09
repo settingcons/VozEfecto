@@ -259,7 +259,7 @@ function loadSoundTestFreq(url) {
     catch (ex9){alert('ERROR loadSoundTest. Exception: '+ex9.message);}
 }
 
-function applyEffects(p_source) {
+function applyEffects() {
     try
     {
         //alert(context.sampleRate); // 48000Hz
@@ -269,7 +269,7 @@ function applyEffects(p_source) {
         /* ----------------------------------------------- */
         if (document.getElementById('Speed_chk').checked){
             //source.playbackRate.value = rangeSP_Speed_lbl.innerHTML;
-            p_source.playbackRate.value = rangeSP_Speed_lbl.innerHTML;
+            sourceNode.playbackRate.value = rangeSP_Speed_lbl.innerHTML;
         }
 
 
@@ -346,8 +346,7 @@ function applyEffects(p_source) {
         /* ----------------------------------------------- */
         //      CONEXION de los NODOS
         /* ----------------------------------------------- */
-        //source.connect(analyser);
-        p_source.connect(analyser);
+        sourceNode.connect(analyser);
         analyser.connect(compressor);
         compressor.connect(distortion);
         distortion.connect(biquadFilter);
