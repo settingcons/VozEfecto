@@ -94,7 +94,8 @@ function setupAudioNodes() {
         //analyser.smoothingTimeConstant = 0.8;
         //analyser.fftSize = 512;
 
-        sourceNode = context.createMediaElementSource(audio);
+        //ESTHER sourceNode = context.createMediaElementSource(audio);
+
         //sourceNode.connect(analyser);
         //sourceNode.connect(context.destination);
 
@@ -106,6 +107,7 @@ function setupAudioNodes() {
         // B U F F E R
         try
         {
+            alert(audio.src);
             source = context.createBufferSource(); //this represents the audio source. We need to now populate it with binary data.
             var request = new XMLHttpRequest();
             request.open('GET', audio.src, true);
@@ -113,6 +115,7 @@ function setupAudioNodes() {
             request.onload = function(){
                 context.decodeAudioData(request.response, function(buffer) {
                     source.buffer = buffer;
+                    alert('buffer');
                 }, null);
             }
             request.send();
@@ -134,7 +137,8 @@ function setupAudioNodes() {
 
 
         //var biquadFilter = context.createBiquadFilter();
-        biquadFilter = (biquadFilter || context.createBiquadFilter());
+        //biquadFilter = (biquadFilter || context.createBiquadFilter());
+        biquadFilter = context.createBiquadFilter();
         if (document.getElementById('BiquadFilter_chk').checked){
             // Manipulate the Biquad filter
             // Type : lowshelf, highshelf, peaking
@@ -146,12 +150,12 @@ function setupAudioNodes() {
             biquadFilter.detune.value = rangeBQ_detune_lbl.innerHTML;           //1540;
         }
 
-        //sourceNode.connect(compressor);
         source.connect(biquadFilter);
         biquadFilter.connect(context.destination);
 
         if(esIOS()){
             source.noteOn(0);
+            alert('noteOn OK');
         }
         else{
             source.start(0);
