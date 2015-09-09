@@ -102,6 +102,23 @@ function setupAudioNodes() {
         /* ------------------------------------------------------------------*/
         // MVL - 09.09.2015 --> aplicar efectos
         //applyEffects();
+
+        // B U F F E R
+        try
+        {
+            source = context.createBufferSource(); //this represents the audio source. We need to now populate it with binary data.
+            var request = new XMLHttpRequest();
+            request.open('GET', audio.src, true);
+            request.responseType = 'arraybuffer'; //This asks the browser to populate the retrieved binary data in a array buffer
+            request.onload = function(){
+                context.decodeAudioData(request.response, function(buffer) {
+                    source.buffer = buffer;
+                }, null);
+            }
+            request.send();
+        }
+        catch (ex9){alert('Web Audio API not supported. Exception: '+ex9.message);}
+
         //var compressor = context.createDynamicsCompressor();
         /*
         compressor = (compressor|| context.createDynamicsCompressor());
@@ -130,11 +147,21 @@ function setupAudioNodes() {
         }
 
         //sourceNode.connect(compressor);
-        biquadFilter.connect(sourceNode);
-        sourceNode.connect(context.destination);
+        source.connect(biquadFilter);
+        biquadFilter.connect(context.destination);
+
+        if(esIOS()){
+            source.noteOn(0);
+        }
+        else{
+            source.start(0);
+        }
+
         /* ------------------------------------------------------------------*/
 
-        audio.play();
+
+        /* LO DE Esther */
+        //audio.play();
         //drawSpectrum();
     }
     catch (ex){mensaje(ex.message,'setupAudioNodes');}
