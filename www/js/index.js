@@ -270,7 +270,8 @@ function playSound_MVL(buffer) {
         /* ----------------------------------------------- */
         //      Gain (Volumen)
         /* ----------------------------------------------- */
-        //var gainNode = context.createGain();
+        var gainNode = context.createGain();
+        gainNode.gain.value = rangeVOL_Gain_lbl.innerHTML;
 
 
         /* ----------------------------------------------- */
@@ -312,11 +313,14 @@ function playSound_MVL(buffer) {
         distortion.connect(biquadFilter);
         if (document.getElementById('Reverb_chk').checked){
             biquadFilter.connect(convolver);
-            convolver.connect(context.destination);
+            convolver.connect(gainNode);
         }
         else{
-            biquadFilter.connect(context.destination);
+            biquadFilter.connect(gainNode);
         }
+        gainNode.connect(context.destination);
+
+
 
         // - - - - - - - - P L A Y - - - - - - - -
         source.start(0);
@@ -327,7 +331,4 @@ function playSound_MVL(buffer) {
 function pararPlay(){
     source.stop();
 }
-
-
-
 

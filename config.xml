@@ -50,6 +50,9 @@
         <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
         <param name="ios-package" value="CDVSound" />
     </feature>
+    <feature name="ExternalFileUtil">
+        <param name="ios-package" value="CDVExternalFileUtil" />
+    </feature>
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />

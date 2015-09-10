@@ -56,12 +56,37 @@
                 </table>
         </div>
 
+        <!-- MVL 10.09.2015 -->
+        <!-- ---------------------------------- -->
+        <!--            SHARED FILE             -->
+        <!-- ---------------------------------- -->
+        <div id="deviceready">
+            <p class="status pending blink">Connecting to Device</p>
+            <p class="status complete  hide">
+                Device is Ready <hr/>
+            Click the button to download a pdf file from a remote server and open it in Adobe Acrobat Reader for iOS
+            <button id="externalPdf" onclick="app.openExternalDoc();">Open external pdf</button>
+            </p>
+        </div>
+
         <!-- MVL 09.09.2015 -->
         <div id="audios"  style="font-size: 20px">
             <hr style="color: #0056b2;"/>
             <div style="font-size: 20px; height: 40px; background-color: #81d4ff">
                 <span id="span_FX" style="width: 100px;font-size: 34px; font-weight: bold">&nbsp;>>&nbsp;APLICAR EFECTOS&nbsp;<<&nbsp;</span>
             </div>
+            <!-- ---------------------------------- -->
+            <!--            VOLUMEN                 -->
+            <!-- ---------------------------------- -->
+            <div id="divGain"  style="font-size: 20px; height: 80px; background-color: #a6b779;">
+                <label for="Volume" style="font-size: 24px; font-weight: bold">Volume</label>
+                <br/>
+                <input id="rangeVOL_Gain" type="range" min="0" max="50" value="5" step="0.1" oninput="rangeVOL_G();">
+                <span id="rangeVOL_Gain_lbl" style="width: 100px">5</span>
+                &nbsp;&nbsp;
+            </div>
+
+
             <!-- ---------------------------------- -->
             <!--            Speed                   -->
             <!-- ---------------------------------- -->
