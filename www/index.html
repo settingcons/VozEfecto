@@ -67,7 +67,7 @@
                 Device is Ready <hr/>
             Click the button to download a pdf file from a remote server and open it in Adobe Acrobat Reader for iOS
             <br/>
-            <button id="externalPdf" style="width: 300px" onclick="app.openExternalDoc();alert('Después openExternalDoc');">Open external pdf</button>
+            <!--<button id="externalPdf" style="width: 300px" onclick="app.openExternalDoc();alert('Después openExternalDoc');">Open external pdf</button>-->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button id="externalDoc" style="width: 300px" onclick="shareFiles();">Open external document</button>
             </p>
@@ -227,8 +227,13 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
+
         <!-- MVL 09.09.2015 -->
         <script type="text/javascript" src="js/audio_effects.js"></script>
+
+        <!-- MVL 10.09.2015 -->
+        <script type="text/javascript" src="js/share_files.js"></script>
+
         <script type="text/javascript">
             app.initialize();
         </script>

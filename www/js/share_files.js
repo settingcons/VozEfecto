@@ -4,6 +4,9 @@
 
 function shareFiles(){
     alert('entra shareFiles');
-    app.openExternalDoc();
-    alert('Después openExternalDoc');
+    try{
+        app.openExternalDoc();
+        alert('Después openExternalDoc');
+    }
+    catch (ex){mensaje(ex.message,'ERROR playSound');}
 }
