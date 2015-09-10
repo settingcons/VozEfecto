@@ -71,6 +71,14 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button id="externalDoc" style="width: 300px" onclick="shareFiles();">Open external document</button>
             </p>
+
+
+            <button onclick="window.plugins.socialsharing.share('Here is your PDF file', 'Your PDF', 'www/files/manual.pdf')">Share PDF</button>
+
+            <button onclick="SocialSharing();">Share FILE</button>
+            <button onclick="SocialSharingWhatApp();">Share WhatsApp File</button>
+
+            <button onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">msg via WhatsApp (with errcallback)</button>
         </div>
 
         <!-- MVL 09.09.2015 -->
