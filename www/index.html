@@ -60,12 +60,16 @@
         <!-- ---------------------------------- -->
         <!--            SHARED FILE             -->
         <!-- ---------------------------------- -->
+        <!-- http://www.tricedesigns.com/2012/08/15/open-with-in-ios-phonegap-apps/ -->
         <div id="deviceready">
             <p class="status pending blink">Connecting to Device</p>
             <p class="status complete  hide">
                 Device is Ready <hr/>
             Click the button to download a pdf file from a remote server and open it in Adobe Acrobat Reader for iOS
-            <button id="externalPdf" onclick="app.openExternalDoc();">Open external pdf</button>
+            <br/>
+            <button id="externalPdf" style="width: 300px" onclick="app.openExternalDoc();alert('Después openExternalDoc');">Open external pdf</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button id="externalDoc" style="width: 300px" onclick="shareFiles();">Open external document</button>
             </p>
         </div>
 
