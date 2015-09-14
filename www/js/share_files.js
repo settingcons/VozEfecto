@@ -58,7 +58,7 @@ function ShareImage(){
 
     alert('Entra ShareImage');
     try {
-        myFile = 'img/shared2.gif';
+        myFile = 'http://www.google.nl/images/srpr/logo4w.png';//'img/shared2.gif';
         if (myFile.length>0){
             try {
                 window.plugins.socialsharing.shareViaWhatsApp('Share message via WhatsApp', myFile, null,
