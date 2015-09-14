@@ -54,6 +54,23 @@ function mostratImg(){
     document.getElementById('imgShared2').src = 'img/shared2.jpeg';
 }
 
+function ShareImage(){
+
+    alert('Entra ShareImage');
+    try {
+        myFile = 'img/shared2.jpeg';
+        if (myFile.length>0){
+            window.plugins.socialsharing.share('Here is your file', 'Your file', myFile);
+        }
+        else{
+            alert('No se ha encontrado fichero para adjuntar');
+        }
+
+    }
+    catch (ex){mensaje('Error: ' + ex.message,'ShareImage');}
+}
+
+
 function SocialImage(){
 
     alert('Entra SocialImage');
