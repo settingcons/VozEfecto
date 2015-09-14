@@ -14,6 +14,7 @@ function shareFiles(){
 
 
 var myFile=null;
+var myUrl=null;
 
 function obtenerFichero(){
 
@@ -117,7 +118,7 @@ function SocialSharingWhatApp(){
         //obtenerFichero();
         myFile = 'img/shared.png';
         if (myFile.length>0){
-            window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null, myFile,
+            window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
                 function() {alert('share ok')},
                 function(errormsg){alert(errormsg)});
         }
