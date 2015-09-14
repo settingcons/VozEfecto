@@ -51,7 +51,7 @@ function obtenerFichero(){
 /*          S H A R E    F I L E
  /* ------------------------------------------------------ */
 function mostratImg(){
-    document.getElementById('imgShared2').src = 'img/shared.png';
+    document.getElementById('imgShared2').src = 'img/shared2.jpeg';
 }
 
 function SocialImage(){
@@ -59,7 +59,7 @@ function SocialImage(){
     alert('Entra SocialImage');
     try {
         //obtenerFichero();
-        myFile = 'img/shared.png';
+        myFile = 'img/shared2.jpeg';
         if (myFile.length>0){
             window.plugins.socialsharing.share('Here is your file', 'Your file', myFile);
         }
@@ -117,10 +117,14 @@ function SocialSharing_OLD(){
 /* ------------------------------------------------------ */
 function SocialSharingWhatApp(){
 
+
+     //window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})"
+
     alert('entra SocialSharingWhatApp');
     try {
         //obtenerFichero();
-        myFile = 'img/shared.png';
+        myFile = 'img/shared2.jpeg';
+        alert(myFile);
         if (myFile != null){
             if (myFile.length>0){
                 window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, null,
