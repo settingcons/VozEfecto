@@ -122,8 +122,7 @@ function SocialSharingWhatApp(){
 
     alert('entra SocialSharingWhatApp');
     try {
-        //obtenerFichero();
-        myFile = 'img/shared2.jpeg';
+        obtenerFichero();
         alert(myFile);
         if (myFile != null){
             if (myFile.length>0){
