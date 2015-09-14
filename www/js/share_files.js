@@ -50,6 +50,10 @@ function obtenerFichero(){
 /* ------------------------------------------------------ */
 /*          S H A R E    F I L E
  /* ------------------------------------------------------ */
+function mostratImg(){
+    document.getElementById('imgShared2').src = 'img/shared.png';
+}
+
 function SocialImage(){
 
     alert('Entra SocialImage');
@@ -116,11 +120,10 @@ function SocialSharingWhatApp(){
     alert('entra SocialSharingWhatApp');
     try {
         //obtenerFichero();
-        myFile = null; //'img/shared.png';
-        myUrl = 'https://www.google.es/';
+        myFile = 'img/shared.png';
         if (myFile != null){
             if (myFile.length>0){
-                window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
+                window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, null,
                     function() {alert('share ok')},
                     function(errormsg){alert(errormsg)});
             }
@@ -129,9 +132,10 @@ function SocialSharingWhatApp(){
             }
         }
         else{
+            myUrl = 'https://www.google.es/';
             if (myUrl !=null){
                 if (myUrl.length>0){
-                    window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
+                    window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null, myUrl,
                         function() {alert('share ok')},
                         function(errormsg){alert(errormsg)});
                 }
