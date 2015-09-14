@@ -60,14 +60,25 @@ function ShareImage(){
     try {
         myFile = 'img/shared2.jpeg';
         if (myFile.length>0){
-            window.plugins.socialsharing.share('Here is your file', 'Your file', myFile);
+            try {
+                window.plugins.socialsharing.share('Here is your file', 'Your file', myFile);
+            }
+            catch (ex1) {
+                try{
+                    window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, null,
+                        function() {alert('share ok')},
+                        function(errormsg){alert(errormsg)});
+                }
+                catch (ex2){mensaje('Error shareViaWhatsApp: ' + ex2.message,'ShareImage');}
+            }
+
         }
         else{
             alert('No se ha encontrado fichero para adjuntar');
         }
 
     }
-    catch (ex){mensaje('Error: ' + ex.message,'ShareImage');}
+    catch (ex){mensaje('Error socialsharing: ' + ex.message,'ShareImage');}
 }
 
 
