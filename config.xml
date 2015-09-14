@@ -69,8 +69,8 @@
     <feature name="SocialSharing">
         <param name="wp-package" value="SocialSharing"/>
     </feature>
-    
-    <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.8" />
+
+    <!--<gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.8" />-->
 
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
