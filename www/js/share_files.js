@@ -49,6 +49,23 @@ function obtenerFichero(){
 /* ------------------------------------------------------ */
 /*          S H A R E    F I L E
  /* ------------------------------------------------------ */
+function SocialImage(){
+
+    alert('Entra SocialImage');
+    try {
+        //obtenerFichero();
+        myFile = 'img/shared.png';
+        if (myFile.length>0){
+            window.plugins.socialsharing.share('Here is your file', 'Your file', myFile);
+        }
+        else{
+            alert('No se ha encontrado fichero para adjuntar');
+        }
+
+    }
+    catch (ex){mensaje('Error: ' + ex.message,'SocialSharingWhat');}
+}
+
 function SocialSharing(){
 
     try {
@@ -97,7 +114,8 @@ function SocialSharingWhatApp(){
 
     alert('entra SocialSharingWhatApp');
     try {
-        obtenerFichero();
+        //obtenerFichero();
+        myFile = 'img/shared.png';
         if (myFile.length>0){
             window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null, myFile,
                 function() {alert('share ok')},
