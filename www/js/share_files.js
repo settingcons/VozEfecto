@@ -58,17 +58,17 @@ function ShareImage(){
 
     alert('Entra ShareImage');
     try {
-        myFile = 'img/shared2.jpeg';
+        myFile = 'img/shared2.gif';
         if (myFile.length>0){
             try {
-                window.plugins.socialsharing.share('Here is your file', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl/');
-                //window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, null,
-                //    function() {alert('share ok')},
-                //    function(errormsg){alert(errormsg)});
+                window.plugins.socialsharing.shareViaWhatsApp('Share message via WhatsApp', myFile, null,
+                    function() {alert('share ok')},
+                    function(errormsg){alert(errormsg)});
             }
             catch (ex1) {
                 try{
-                    window.plugins.socialsharing.share('Here is your file', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl/');
+                    //window.plugins.socialsharing.share('Here is your file', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl/');
+                    window.plugins.socialsharing.share('Share: ' + myFile, 'the file', myFile);
                 }
                 catch (ex2){mensaje('Error shareViaWhatsApp: ' + ex2.message,'ShareImage');}
             }
