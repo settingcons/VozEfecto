@@ -118,13 +118,27 @@ function SocialSharingWhatApp(){
         //obtenerFichero();
         myFile = null; //'img/shared.png';
         myUrl = 'https://www.google.es/';
-        if (myFile.length>0){
-            window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
-                function() {alert('share ok')},
-                function(errormsg){alert(errormsg)});
+        if (myFile !=null){
+            if (myFile.length>0){
+                window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
+                    function() {alert('share ok')},
+                    function(errormsg){alert(errormsg)});
+            }
+            else{
+                alert('No se ha encontrado fichero para adjuntar');
+            }
         }
         else{
-            alert('No se ha encontrado fichero para adjuntar');
+            if (myUrl !=null){
+                if (myFile.length>0){
+                    window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
+                        function() {alert('share ok')},
+                        function(errormsg){alert(errormsg)});
+                }
+                else{
+                    alert('No se ha encontrado fichero para adjuntar');
+                }
+            }
         }
 
         alert('Después ejecutar SocialSharingWhatApp');
