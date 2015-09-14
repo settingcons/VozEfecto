@@ -24,7 +24,7 @@ function shareFiles(){
 
 function SocialSharing(){
 
-    alert('entra SocialSharing');
+    //alert('entra SocialSharing');
     try {
         var v_fichero = '';
         if(esIOS()) {
@@ -40,7 +40,7 @@ function SocialSharing(){
         miFichero = v_fichero;
 
         window.plugins.socialsharing.share('Here is your WAV file', 'Your WAV', miFichero);
-        alert('Después ejecutar SocialSharing');
+        //alert('Después ejecutar SocialSharing');
 
     }
     catch (ex){mensaje(ex.message,'SocialSharingWhat');}
@@ -64,7 +64,7 @@ function SocialSharingWhatApp(){
         miFichero = v_fichero;
 
         //window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)});
-        window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, null /* url */,
+        window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', miFichero, miFichero,
                 function() {alert('share ok')},
                 function(errormsg){alert(errormsg)});
 
