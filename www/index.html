@@ -74,11 +74,19 @@
 
 
             <button onclick="window.plugins.socialsharing.share('Here is your PDF file', 'Your PDF', 'www/files/manual.pdf')">Share PDF</button>
-
-            <button onclick="SocialSharing();">Share FILE</button>
-            <button onclick="SocialSharingWhatApp();">Share WhatsApp File</button>
+            <button src="img/" onclick="window.plugins.socialsharing.share('Here is your PDF file', 'Your PDF', 'www/files/manual.pdf')">Share PDF</button>
 
             <button onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">msg via WhatsApp (with errcallback)</button>
+
+            <br/><br/>&nbsp;&nbsp;&nbsp;
+            <img id="imgShared" src="img/shared.png"   align="center" width="50px" height="50px" border="none" onclick="window.plugins.socialsharing.share('Here is your PDF file', 'Your PDF', 'www/files/manual.pdf')" />
+            &nbsp;&nbsp;&nbsp;
+            <img id="imgSharedWhatapp" src="img/shared_whatsapp.png"  align="center" width="50px" height="50px" border="none" onclick="SocialSharingWhatApp();"/>
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+            <button onclick="SocialSharing();" style="height: 50px;">Share FILE</button>
+            <button onclick="SocialSharingWhatApp();" style="height: 50px;">Share WhatsApp File</button>
+
         </div>
 
         <!-- MVL 09.09.2015 -->
