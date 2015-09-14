@@ -61,13 +61,13 @@ function ShareImage(){
         myFile = 'img/shared2.jpeg';
         if (myFile.length>0){
             try {
-                window.plugins.socialsharing.share('Here is your file', 'Your file', myFile);
+                window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, null,
+                    function() {alert('share ok')},
+                    function(errormsg){alert(errormsg)});
             }
             catch (ex1) {
                 try{
-                    window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, null,
-                        function() {alert('share ok')},
-                        function(errormsg){alert(errormsg)});
+                    window.plugins.socialsharing.share('Here is your file', 'Your file', myFile);
                 }
                 catch (ex2){mensaje('Error shareViaWhatsApp: ' + ex2.message,'ShareImage');}
             }
