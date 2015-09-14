@@ -116,7 +116,8 @@ function SocialSharingWhatApp(){
     alert('entra SocialSharingWhatApp');
     try {
         //obtenerFichero();
-        myFile = 'img/shared.png';
+        myFile = null; //'img/shared.png';
+        myUrl = 'https://www.google.es/';
         if (myFile.length>0){
             window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
                 function() {alert('share ok')},
