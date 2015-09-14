@@ -13,6 +13,26 @@ function shareFiles(){
 }
 
 
+var myFile=null;
+
+function obtenerFichero(){
+
+    try {
+        var v_fichero = '';
+        if(esIOS()) {
+            v_fichero = _mediaAudioFicheroIOS;
+            var v_dir = window.rootFS.toURL();
+            v_dir = v_dir.substring("file://".length);
+            v_fichero = v_dir + v_fichero;
+        }
+        else{
+            v_fichero=ObtenerFicheroAudio();
+        }
+        myFile = v_fichero;
+    }
+    catch (ex){mensaje('Error: ' + ex.message,'obtenerFichero');}
+
+}
 
 
 
@@ -22,7 +42,29 @@ function shareFiles(){
 /* -------------------------------------------------------------------------- */
 /* https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin */
 
+/* Change Pluggin para adjuntar audio en vez de audio: */
+/* http://stackoverflow.com/questions/29608287/intel-xdk-share-audio-file
+ */
+
+/* ------------------------------------------------------ */
+/*          S H A R E    F I L E
+ /* ------------------------------------------------------ */
 function SocialSharing(){
+
+    try {
+        obtenerFichero();
+        if (myFile.length>0){
+            window.plugins.socialsharing.share('Here is your file', 'Your file', myFile);
+        }
+        else{
+            alert('No se ha encontrado fichero para adjuntar');
+        }
+
+    }
+    catch (ex){mensaje('Error: ' + ex.message,'SocialSharingWhat');}
+}
+
+function SocialSharing_OLD(){
 
     //alert('entra SocialSharing');
     try {
@@ -43,10 +85,35 @@ function SocialSharing(){
         //alert('Después ejecutar SocialSharing');
 
     }
-    catch (ex){mensaje(ex.message,'SocialSharingWhat');}
+    catch (ex){mensaje('Error: ' + ex.message,'SocialSharingWhat');}
 }
 
+
+
+/* ------------------------------------------------------ */
+/*          W H A T S A P P    S H A R E    F I L E
+/* ------------------------------------------------------ */
 function SocialSharingWhatApp(){
+
+    alert('entra SocialSharingWhatApp');
+    try {
+        obtenerFichero();
+        if (myFile.length>0){
+            window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null, myFile,
+                function() {alert('share ok')},
+                function(errormsg){alert(errormsg)});
+        }
+        else{
+            alert('No se ha encontrado fichero para adjuntar');
+        }
+
+        alert('Después ejecutar SocialSharingWhatApp');
+
+    }
+    catch (ex){mensaje('Error: ' + ex.message,'SocialSharingWhatApp');}
+}
+
+function SocialSharingWhatApp_OLD(){
 
     alert('entra SocialSharingWhatApp');
     try {
@@ -64,13 +131,12 @@ function SocialSharingWhatApp(){
         miFichero = v_fichero;
 
         //window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)});
-        window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', miFichero, miFichero,
-                function() {alert('share ok')},
-                function(errormsg){alert(errormsg)});
+        window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null, miFichero,
+            function() {alert('Share OK')},
+            function(errormsg){alert(errormsg)});
 
         alert('Después ejecutar SocialSharingWhatApp');
 
     }
-    catch (ex){mensaje(ex.message,'SocialSharingWhatApp');}
-
+    catch (ex){mensaje('Error: ' + ex.message,'SocialSharingWhatApp');}
 }
