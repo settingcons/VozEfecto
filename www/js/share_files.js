@@ -118,7 +118,7 @@ function SocialSharingWhatApp(){
         //obtenerFichero();
         myFile = null; //'img/shared.png';
         myUrl = 'https://www.google.es/';
-        if (myFile !=null){
+        if (myFile != null){
             if (myFile.length>0){
                 window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
                     function() {alert('share ok')},
@@ -130,7 +130,7 @@ function SocialSharingWhatApp(){
         }
         else{
             if (myUrl !=null){
-                if (myFile.length>0){
+                if (myUrl.length>0){
                     window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', myFile, myUrl,
                         function() {alert('share ok')},
                         function(errormsg){alert(errormsg)});
