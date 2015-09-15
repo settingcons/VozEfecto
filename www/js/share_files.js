@@ -82,6 +82,36 @@ function ShareImage(){
     catch (ex){mensaje('Error socialsharing: ' + ex.message,'ShareImage');}
 }
 
+function ShareAudio(){
+
+    alert('Entra ShareImage');
+    try {
+        //v_dir = v_dir.substring("file://".length);
+        myFile = "file://" + obtenerFichero();
+        alert(myFile);
+        if (myFile.length>0){
+            try {
+                window.plugins.socialsharing.shareViaWhatsApp('Share message via WhatsApp', myFile, null,
+                    function() {alert('share ok')},
+                    function(errormsg){alert(errormsg)});
+            }
+            catch (ex1) {
+                try{
+                    //window.plugins.socialsharing.share('Here is your file', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl/');
+                    window.plugins.socialsharing.share('Share: ' + myFile, 'the file', myFile);
+                }
+                catch (ex2){mensaje('Error shareViaWhatsApp: ' + ex2.message,'ShareImage');}
+            }
+
+        }
+        else{
+            alert('No se ha encontrado fichero para adjuntar');
+        }
+
+    }
+    catch (ex){mensaje('Error socialsharing: ' + ex.message,'ShareImage');}
+}
+
 
 function SocialImage(){
 
