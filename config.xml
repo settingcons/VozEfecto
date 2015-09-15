@@ -54,6 +54,8 @@
     <!-- *********** Shared files PLUGIN SETTING *********** -->
     <!--<gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="4.3.19" />-->
 
+    
+
     <!-- *********** Shared files OTHER PLUGIN *********** -->
     <feature name="ExternalFileUtil">
         <param name="ios-package" value="CDVExternalFileUtil" />
