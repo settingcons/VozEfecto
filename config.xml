@@ -52,7 +52,7 @@
     </feature>
 
     <!-- *********** Shared files PLUGIN SETTING *********** -->
-    <gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="4.3.19" />
+    <gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.1" />
 
 
 
