@@ -10,7 +10,9 @@
     <content src="index.html" />
     <preference name="permissions" value="none" />
     <!-- si se utiliza la versión de phonegap 3.6.3 no funciona la geolocalización -->
-    <preference name="phonegap-version" value="3.5.0" />
+    <!--<preference name="phonegap-version" value="3.5.0" />-->
+    <preference name="phonegap-version" value=">= 4.0.0" />
+    
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <!--si se pone fullscreen a true se oculta la barra de estado de la parte superior -->
