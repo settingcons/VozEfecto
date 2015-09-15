@@ -19,10 +19,12 @@ var myUrl=null;
 function obtenerFichero(){
 
     try {
+        alert('Entra en obtenerFichero');
         var v_fichero = '';
         if(esIOS()) {
             v_fichero = _mediaAudioFicheroIOS;
             var v_dir = window.rootFS.toURL();
+            alert('dir: ' + v_dir);
             v_dir = v_dir.substring("file://".length);
             v_fichero = v_dir + v_fichero;
         }
