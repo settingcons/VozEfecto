@@ -19,12 +19,10 @@ var myUrl=null;
 function obtenerFichero(){
 
     try {
-        alert('Entra en obtenerFichero');
         var v_fichero = '';
         if(esIOS()) {
             v_fichero = _mediaAudioFicheroIOS;
             var v_dir = window.rootFS.toURL();
-            alert('dir: ' + v_dir);
             v_dir = v_dir.substring("file://".length);
             v_fichero = v_dir + v_fichero;
         }
@@ -32,6 +30,7 @@ function obtenerFichero(){
             v_fichero=ObtenerFicheroAudio();
         }
         myFile = v_fichero;
+        alert('myFile: ' + myFile);
     }
     catch (ex){mensaje('Error: ' + ex.message,'obtenerFichero');}
 
@@ -89,7 +88,7 @@ function ShareAudio(){
     alert('Entra ShareImage');
     try {
         //v_dir = v_dir.substring("file://".length);
-        myFile = "file://" + obtenerFichero();
+        myFile = "file://" + myFile;
         alert(myFile);
         if (myFile.length>0){
             try {
