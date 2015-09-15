@@ -30,7 +30,6 @@ function obtenerFichero(){
             v_fichero=ObtenerFicheroAudio();
         }
         myFile = v_fichero;
-        alert('myFile: ' + myFile);
     }
     catch (ex){mensaje('Error: ' + ex.message,'obtenerFichero');}
 
@@ -88,8 +87,10 @@ function ShareAudio(){
     alert('Entra ShareImage');
     try {
         //v_dir = v_dir.substring("file://".length);
-        myFile = "file://" + myFile;
-        alert(myFile);
+        var v_dir = window.rootFS.toURL() + _mediaAudioFicheroIOS;
+        alert('v_dir: ' + v_dir);
+        myFile = v_dir;
+
         if (myFile.length>0){
             try {
                 window.plugins.socialsharing.shareViaWhatsApp('Share message via WhatsApp', myFile, null,
