@@ -84,10 +84,16 @@ function ShareImage(){
 
 function ShareAudio(){
 
-    alert('Entra ShareImage');
+    alert('Entra ShareAudio');
     try {
         //v_dir = v_dir.substring("file://".length);
-        var v_dir = window.rootFS.toURL() + _mediaAudioFicheroIOS;
+        var v_dir = '';
+        if(esIOS()) {
+            v_dir = window.rootFS.toURL() + _mediaAudioFicheroIOS;
+        }
+        else{
+            v_dir=ObtenerFicheroAudio();
+        }
         alert('v_dir: ' + v_dir);
         myFile = v_dir;
 
