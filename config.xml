@@ -12,7 +12,7 @@
     <!-- si se utiliza la versión de phonegap 3.6.3 no funciona la geolocalización -->
     <!--<preference name="phonegap-version" value="3.5.0" />-->
     <preference name="phonegap-version" value=">= 4.0.0" />
-    
+
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <!--si se pone fullscreen a true se oculta la barra de estado de la parte superior -->
@@ -55,7 +55,7 @@
 
     <!-- *********** Shared files PLUGIN SETTING *********** -->
     <!--<gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.2" />-->
-    <gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.4" />
+    <gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.5" />
 
 
 
