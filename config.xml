@@ -53,7 +53,7 @@
 
     <!-- *********** Shared files PLUGIN SETTING *********** -->
     <!--<gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.2" />-->
-    <gap:plugin name="settingconsultoria.cordova.plugins.socialsharing"/>
+    <gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.3" />
 
 
 
