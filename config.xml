@@ -54,8 +54,7 @@
     </feature>
 
     <!-- *********** Shared files PLUGIN SETTING *********** -->
-    <!--<gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.2" />-->
-    <gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.5" />
+    <!--gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="0.0.5" />-->
 
 
 
@@ -64,24 +63,30 @@
     <!--
     <feature name="ExternalFileUtil">
         <param name="ios-package" value="CDVExternalFileUtil" />
-    </feature>-->
+    </feature>
 
-    <!-- for iOS --><!--
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+        <param name="ios-package" value="CDVFileTransfer" />
+    </feature>
+    -->
+
+    <!-- for iOS -->
     <feature name="SocialSharing">
         <param name="ios-package" value="SocialSharing" />
-    </feature>-->
+    </feature>
 
     <!-- for Android (you will find one in res/xml) -->
-    <!--
     <feature name="SocialSharing">
         <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
-    </feature>-->
+    </feature>
 
     <!-- for Windows Phone -->
-    <!--
     <feature name="SocialSharing">
         <param name="wp-package" value="SocialSharing"/>
-    </feature>-->
+    </feature>
+
+
 
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
@@ -102,14 +107,11 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.vibration" />
 
+
     <plugin name="SplashScreen" value="”org.apache.cordova.SplashScreen"/>
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="ios-package" value="CDVFile" />
-    </feature>
-    <feature name="FileTransfer">
-        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
-        <param name="ios-package" value="CDVFileTransfer" />
     </feature>
 
     <icon src="icon.png" />
