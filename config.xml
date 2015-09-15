@@ -52,23 +52,26 @@
     </feature>
 
     <!-- *********** Shared files *********** -->
+    <gap:plugin name="settingconsultoria.cordova.plugins.socialsharing" version="4.3.19" />
+
+    <!--
     <feature name="ExternalFileUtil">
         <param name="ios-package" value="CDVExternalFileUtil" />
     </feature>
+    -->
 
-    <!-- for iOS -->
-    <gap:plugin name="nl.x-services.plugins.socialsharing" source="plugins.cordova.io" />
+    <!-- for iOS --><!--
     <feature name="SocialSharing">
         <param name="ios-package" value="SocialSharing" />
-    </feature>
-    <!-- for Android (you will find one in res/xml) -->
+    </feature>-->
+    <!-- for Android (you will find one in res/xml) --><!--
     <feature name="SocialSharing">
         <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
-    </feature>
-    <!-- for Windows Phone -->
+    </feature>-->
+    <!-- for Windows Phone --><!--
     <feature name="SocialSharing">
         <param name="wp-package" value="SocialSharing"/>
-    </feature>
+    </feature>-->
 
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
