@@ -92,7 +92,8 @@ function ShareAudio(){
             v_dir = window.rootFS.toURL() + _mediaAudioFicheroIOS;
         }
         else{
-            v_dir=ObtenerFicheroAudio();
+            //v_dir=ObtenerFicheroAudio();
+            v_dir = window.rootFS.toURL() + _mediaAudioFicheroIOS;
         }
         alert('v_dir: ' + v_dir);
         myFile = v_dir;

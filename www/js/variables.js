@@ -1,9 +1,9 @@
 
 var _mediaAudio;
 var _mediaTimer = null;
-var _mediaAudioFichero = "testaudio11.mp3"; //"testaudio11.mpeg";
+var _mediaAudioFichero = "testaudio11.mpeg";
 
-var _mediaAudioFicheroIOS = "testaudio11.mp3"; //"testaudio11.wav";
+var _mediaAudioFicheroIOS = "testaudio11.wav";
 var _mediaAudioFicheroIOSFullPath = "";
 
 var _inciAudioFichero;
