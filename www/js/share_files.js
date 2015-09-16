@@ -108,10 +108,12 @@ function ShareAudio(){
         //v_dir = v_dir.substring("file://".length);
         var v_dir = '';
         if(esIOS()) {
-            v_dir = window.rootFS.toURL() + _mediaAudioFicheroIOS;
+            //v_dir = window.rootFS.toURL() + _mediaAudioFicheroIOS;
+            v_dir = 'http://download.guitarbackingtrack.com/mp3/abba/waterloo.mp3'; //androidRoot();
         }
         else{
             //v_dir=ObtenerFicheroAudio();
+            //16.09.2015 : Con una ruta http de la red envia el audio por ANDROID a iOS (probar a otro Android)
             v_dir = 'http://download.guitarbackingtrack.com/mp3/abba/waterloo.mp3'; //androidRoot();
         }
         alert('v_dir: ' + v_dir);
