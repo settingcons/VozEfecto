@@ -59,6 +59,7 @@ function ShareImage(){
     alert('Entra ShareImage');
     try {
         myFile = 'http://www.google.nl/images/srpr/logo4w.png';//'img/shared2.gif';
+        //myFile = 'http://download.guitarbackingtrack.com/mp3/ac%20dc/back%20in%20black.mp3';
         if (myFile.length>0){
             try {
                 window.plugins.socialsharing.shareViaWhatsApp('Share message via WhatsApp', myFile, null,
@@ -82,6 +83,24 @@ function ShareImage(){
     catch (ex){mensaje('Error socialsharing: ' + ex.message,'ShareImage');}
 }
 
+function androidRoot(){
+    alert(androidRoot);
+    var myRoot = '';
+    try{
+
+        myRoot = window.resolveLocalFileSystemURL(cordova.file.applicationDirectory ,success,fail);
+        function success(fileEntry){
+            alert("myRoot : " + myRoot);
+        }
+        function fail(error) {
+            alert("error : " + error);
+        }
+    }
+    catch (ex){mensaje('Error: ' + ex.message,'SocialSharingWhat');}
+
+    return myRoot;
+}
+
 function ShareAudio(){
 
     alert('Entra ShareAudio');
@@ -93,7 +112,7 @@ function ShareAudio(){
         }
         else{
             //v_dir=ObtenerFicheroAudio();
-            v_dir = window.rootFS.toURL() + _mediaAudioFicheroIOS;
+            v_dir = 'http://download.guitarbackingtrack.com/mp3/ac%20dc/back%20in%20black.mp3'; //androidRoot();
         }
         alert('v_dir: ' + v_dir);
         myFile = v_dir;
