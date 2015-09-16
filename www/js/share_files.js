@@ -112,7 +112,7 @@ function ShareAudio(){
         }
         else{
             //v_dir=ObtenerFicheroAudio();
-            v_dir = 'http://download.guitarbackingtrack.com/mp3/ac%20dc/back%20in%20black.mp3'; //androidRoot();
+            v_dir = 'http://download.guitarbackingtrack.com/mp3/abba/waterloo.mp3'; //androidRoot();
         }
         alert('v_dir: ' + v_dir);
         myFile = v_dir;
